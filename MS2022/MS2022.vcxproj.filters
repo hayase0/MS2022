@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="system">
+      <UniqueIdentifier>{1554ad8e-5ded-4443-b056-9a1e57fad9f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameobject">
+      <UniqueIdentifier>{a27f74f0-f80e-45c9-b2e6-2945e2f9e738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{006283fe-1bb0-43ce-b9f2-17dc4e61bd0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{ad9df3c2-546b-4c97-99af-57fae1a4014c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader">
+      <UniqueIdentifier>{03231a48-6a87-432a-b111-6c3485ab9b0a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\main.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="source\manager.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="source\texture.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="source\shader.cpp">
+      <Filter>shader</Filter>
+    </ClCompile>
+    <ClCompile Include="source\window.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\main.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="source\manager.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="source\renderer.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="source\game_object.h">
+      <Filter>gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="source\texture.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+    <ClInclude Include="source\scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\title.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\shader.h">
+      <Filter>shader</Filter>
+    </ClInclude>
+    <ClInclude Include="source\game.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\result.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\window.h">
+      <Filter>system</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
