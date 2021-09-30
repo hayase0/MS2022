@@ -18,5 +18,15 @@
 #define SCREEN_HEIGHT   (1080)      // ウインドウの高さ
 
 
+
+class CWindow {
+private:
+
+public:
+    static void Initialize(HINSTANCE);
+    static void Display(int);
+
+};
+
 HWND GetWindow();
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);

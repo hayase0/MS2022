@@ -1,19 +1,29 @@
+/*==================================================================================================
+    MS2022
+    [manager.h]
+    ・マネージャー
+----------------------------------------------------------------------------------------------------
+    2021.09.27 @Author HAYASE SUZUKI
+====================================================================================================
+    History
+        210927 作成
+
+/*================================================================================================*/
 #pragma once
 
 #include "scene.h"
 
-class CManager
-{
+class CManager {
 private:
-	static CScene*	m_Scene;
+    static CScene* m_Scene;
 
 public:
-	static void Init();
-	static void Uninit();
-	static void Update();
-	static void Draw();
+    static void Init(HINSTANCE, int);
+    static void Uninit();
+    static void Update();
+    static void Draw();
 
-	static CScene* GetScene() { return m_Scene; }
+    static CScene* GetScene() { return m_Scene; }
 
     template<typename T>
     static void SetScene() {
@@ -24,5 +34,4 @@ public:
         m_Scene = new T();
         m_Scene->Init();
     }
-
 };

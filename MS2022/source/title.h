@@ -12,7 +12,6 @@ public:
     CTitle() {}
     ~CTitle() {}
 
-
     void Init() {
 
     }
@@ -27,7 +26,6 @@ public:
         }
     }
 
-
     void Update() {
         for (int i = 0; i < LAYER; i++) {
             for (auto object : m_GameObject[i]) {
@@ -37,7 +35,6 @@ public:
             m_GameObject[i].remove_if([](auto object) { return object->Destroy(); });
         }
     }
-
 
     void Draw() {
         for (int i = 0; i < LAYER; i++) {

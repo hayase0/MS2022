@@ -16,7 +16,6 @@ public:
     CScene() {}
     virtual ~CScene() {}
 
-
     virtual void Init() {
 
     }
@@ -31,7 +30,6 @@ public:
         }
     }
 
-
     virtual void Update() {
         for (int i = 0; i < LAYER; i++) {
             for (auto object : m_GameObject[i]) {
@@ -42,7 +40,6 @@ public:
         }
     }
 
-
     virtual void Draw() {
         for (int i = 0; i < LAYER; i++) {
             for (auto object : m_GameObject[i]) {
@@ -50,7 +47,6 @@ public:
             }
         }
     }
-
 
     template <typename T>
     T* AddGameObject(int layer) {
