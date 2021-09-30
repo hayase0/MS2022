@@ -53,9 +53,11 @@ void CTexture::Load(const char *FileName)
 		for (unsigned int x = 0; x < width; x++)
 		{
 			unsigned char c;
-			c = image[(y * width + x) * bpp + 0];
-			image[(y * width + x) * bpp + 0] = image[(y * width + x) * bpp + 2];
-			image[(y * width + x) * bpp + 2] = c;
+			if ((y * width + x) * bpp + 2 < size) {
+				c = image[(y * width + x) * bpp + 0];
+				image[(y * width + x) * bpp + 0] = image[(y * width + x) * bpp + 2];
+				image[(y * width + x) * bpp + 2] = c;
+			}
 		}
 	}
 
@@ -96,8 +98,7 @@ void CTexture::Load(const char *FileName)
 		assert(false);
 	}
 
-
-	delete image;
+	delete[] image;
 }
 
 

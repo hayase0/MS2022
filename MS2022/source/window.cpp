@@ -10,11 +10,10 @@
 
 /*================================================================================================*/
 #include "window.h"
+#include "manager.h"
 
 
-
-
-HWND g_Window;
+static HWND g_Window;
 
 HWND GetWindow() {
     return g_Window;
@@ -45,8 +44,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-// ウィンドウ生成
-bool WINDOW_initialize(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+// ウィンドウの生成
+void CWindow::Initialize(HINSTANCE hInstance) {
+
 
     WNDCLASSEX wcex = {
         sizeof(WNDCLASSEX),
@@ -81,3 +81,14 @@ bool WINDOW_initialize(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmd
         hInstance,
         NULL);
 }
+
+// ウインドウの表示(CRenderer::Init()の後に行う)
+void CWindow::Display(int nCmdShow) {
+    ShowWindow(g_Window, nCmdShow);
+    UpdateWindow(g_Window);
+}
+
+//bool WINDOW_finalize() {
+//    // ウィンドウクラスの登録を解除
+//    UnregisterClass(CLASS_NAME, wcex.hInstance);
+//}
