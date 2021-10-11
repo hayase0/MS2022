@@ -29,7 +29,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
         break;
 
     case WM_CLOSE:
-        if (MessageBox(hWnd, "本当に終了してよろしいですか？", "終了", MB_OKCANCEL | MB_DEFBUTTON2) == IDOK) {
+        if (MessageBox(hWnd, "終了してよろしいですか？", "終了", MB_OKCANCEL | MB_DEFBUTTON2) == IDOK) {
             DestroyWindow(hWnd);
         }
         return 0;
@@ -46,8 +46,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 // ウィンドウの生成
 void CWindow::Initialize(HINSTANCE hInstance) {
-
-
     WNDCLASSEX wcex = {
         sizeof(WNDCLASSEX),
         CS_CLASSDC,

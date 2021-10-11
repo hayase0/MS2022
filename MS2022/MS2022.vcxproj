@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\frame_rate.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\manager.cpp" />
     <ClCompile Include="source\renderer.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="source\window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\frame_rate.h" />
     <ClInclude Include="source\game.h" />
     <ClInclude Include="source\game_object.h" />
     <ClInclude Include="source\main.h" />

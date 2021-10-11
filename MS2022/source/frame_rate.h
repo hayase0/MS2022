@@ -1,9 +1,9 @@
 /*==================================================================================================
     MS2022
-    [main.h]
-    ・メイン
+    [frame_rate.h]
+    ・フレームレート管理
 ----------------------------------------------------------------------------------------------------
-    2021.09.27 @Author HAYASE SUZUKI
+    2021.09.27 @Author WATARU FUKUOKA
 ====================================================================================================
     History
         210927 作成
@@ -11,17 +11,12 @@
 /*================================================================================================*/
 #pragma once
 
-#define _CRT_SECURE_NO_WARNINGS
+class CFrameRate {
+private:
 
-#define VALUE_FPS (60) // フレームレート
+public:
+    static void Initialize();
+    static void Finalize();
+    static bool FPS_check(float);
 
-#include <stdio.h>
-#include <windows.h>
-#include <assert.h>
-
-#include <d3d11.h>
-#include <DirectXMath.h>
-using namespace DirectX;
-
-#pragma comment (lib, "d3d11.lib")
-#pragma comment (lib, "winmm.lib")
+};

@@ -12,6 +12,7 @@
 #include "main.h"
 #include "window.h"
 #include "manager.h"
+#include "frame_rate.h"
 #include "renderer.h"
 #include "title.h"
 
@@ -19,6 +20,7 @@ CScene* CManager::m_Scene;
 
 
 void CManager::Init(HINSTANCE hInstance, int nCmdShow) {
+    CFrameRate::Initialize();
     CWindow::Initialize(hInstance);
     CRenderer::Init();
     CWindow::Display(nCmdShow);
@@ -33,6 +35,7 @@ void CManager::Uninit() {
     delete m_Scene;
 
     CRenderer::Uninit();
+    CFrameRate::Finalize();
 }
 
 void CManager::Update() {

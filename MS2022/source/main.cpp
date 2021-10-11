@@ -12,17 +12,10 @@
 #include "main.h"
 #include "window.h"
 #include "manager.h"
+#include "frame_rate.h"
 
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
-
-    //フレームカウント初期化
-    DWORD dwExecLastTime;
-    DWORD dwCurrentTime;
-    timeBeginPeriod(1);
-    dwExecLastTime = timeGetTime();
-    dwCurrentTime = 0;
-
 
     CManager::Init(hInstance, nCmdShow);
 
@@ -40,11 +33,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
             }
         }
         else {
-            dwCurrentTime = timeGetTime();
-
-            if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60)) {
-                dwExecLastTime = dwCurrentTime;
-
+            if (CFrameRate::FPS_check(VALUE_FPS)) {
                 // 更新処理
                 CManager::Update();
 
@@ -53,8 +42,6 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
             }
         }
     }
-
-    timeEndPeriod(1); // 分解能を戻す
 
     // 終了処理
     CManager::Uninit();
