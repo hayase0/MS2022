@@ -21,8 +21,6 @@ private:
     ID3D11Buffer* m_LightBuffer;
     LIGHT					m_Light;
     
-    
-
     ID3D11Buffer* m_BoneBuffer = NULL;
     XMFLOAT4X4      m_Bone[MAX_BONE] = { XMFLOAT4X4() };
 
