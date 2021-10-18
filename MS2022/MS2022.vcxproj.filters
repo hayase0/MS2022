@@ -36,6 +36,9 @@
     <ClCompile Include="source\window.cpp">
       <Filter>system</Filter>
     </ClCompile>
+    <ClCompile Include="source\frame_rate.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main.h">
@@ -69,6 +72,9 @@
       <Filter>scene</Filter>
     </ClInclude>
     <ClInclude Include="source\window.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="source\frame_rate.h">
       <Filter>system</Filter>
     </ClInclude>
   </ItemGroup>

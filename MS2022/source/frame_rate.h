@@ -1,9 +1,9 @@
 /*==================================================================================================
     MS2022
-    [texture.h]
-    ・テクスチャー
+    [frame_rate.h]
+    ・フレームレート管理
 ----------------------------------------------------------------------------------------------------
-    2021.09.27 @Author HAYASE SUZUKI
+    2021.09.27 @Author WATARU FUKUOKA
 ====================================================================================================
     History
         210927 作成
@@ -11,26 +11,15 @@
 /*================================================================================================*/
 #pragma once
 
-#include "main.h"
-#include "renderer.h"
 
+#define VALUE_FPS (60) // フレームレート
 
-
-
-class CTexture
-{
-
-public:
-
-	void Load( const char *FileName );
-	void Unload();
-
-	ID3D11ShaderResourceView* GetShaderResourceView(){ return m_ShaderResourceView; }
-
-
+class CFrameRate {
 private:
 
-	ID3D11Texture2D*			m_Texture;
-	ID3D11ShaderResourceView*	m_ShaderResourceView;
+public:
+    static void Initialize();
+    static void Finalize();
+    static bool FPS_check(float);
 
 };
