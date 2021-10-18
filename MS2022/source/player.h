@@ -18,9 +18,9 @@
 // プレイヤークラス（ゲームオブジェクト）
 class CPlayer : public CGameObject {
 private:
-	CAnimationModel* m_AnimModel;
-	float m_Frame;
-	CShader* m_Shader;
+	CAnimationModel* m_AnimModel = NULL;
+	float m_Frame = NULL;
+	CShader* m_Shader = NULL;
 
 public:
 	/*CCube();
