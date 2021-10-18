@@ -13,6 +13,7 @@
 #include "window.h"
 #include "renderer.h"
 #include "texture.h"
+#include "texture_wic.h"
 #include <io.h>
 
 
@@ -242,6 +243,13 @@ void CRenderer::SetIndexBuffer(ID3D11Buffer* IndexBuffer) {
 
 
 void CRenderer::SetTexture(CTexture* Texture, unsigned int Slot) {
+
+    ID3D11ShaderResourceView* srv[1] = { Texture->GetShaderResourceView() };
+    m_ImmediateContext->PSSetShaderResources(Slot, 1, srv);
+
+}
+
+void CRenderer::SetTexture(CTextureWIC* Texture, unsigned int Slot) {
 
     ID3D11ShaderResourceView* srv[1] = { Texture->GetShaderResourceView() };
     m_ImmediateContext->PSSetShaderResources(Slot, 1, srv);

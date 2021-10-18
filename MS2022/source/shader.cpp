@@ -1,14 +1,4 @@
-/*==================================================================================================
-    MS2022
-    [shader.cpp]
-    ・シェーダー
-----------------------------------------------------------------------------------------------------
-    2021.09.27 @Author HAYASE SUZUKI
-====================================================================================================
-    History
-        210927 作成
 
-/*================================================================================================*/
 #include "main.h"
 #include "renderer.h"
 #include "shader.h"
@@ -34,10 +24,12 @@ void CShader::Init(const char* VertexShader, const char* PixelShader) {
         {
             D3D11_INPUT_ELEMENT_DESC layout[] =
             {
-                { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-                { "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-                { "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-                { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+                { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+                { "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 4*3, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+                { "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT,0, 4*6, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+                { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 4*10, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+                { "WEIGHT",   0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 4*12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+                { "BONENO",   0, DXGI_FORMAT_R32G32B32A32_UINT, 0, 4*16, D3D11_INPUT_PER_VERTEX_DATA, 0 }
             };
             UINT numElements = ARRAYSIZE(layout);
 
@@ -81,6 +73,9 @@ void CShader::Init(const char* VertexShader, const char* PixelShader) {
 
         hBufferDesc.ByteWidth = sizeof(LIGHT);
         CRenderer::GetDevice()->CreateBuffer(&hBufferDesc, NULL, &m_LightBuffer);
+
+        hBufferDesc.ByteWidth = sizeof(XMFLOAT4X4) * MAX_BONE;
+        CRenderer::GetDevice()->CreateBuffer(&hBufferDesc, NULL, &m_BoneBuffer);
     }
 
     m_Light.Direction = XMFLOAT4(1.0f, -1.0f, 1.0f, 0.0f);
@@ -126,13 +121,16 @@ void CShader::Set() {
     // 定数バッファ更新
     CRenderer::GetDeviceContext()->UpdateSubresource(m_ConstantBuffer, 0, NULL, &m_Constant, 0, 0);
     CRenderer::GetDeviceContext()->UpdateSubresource(m_LightBuffer, 0, NULL, &m_Light, 0, 0);
+    CRenderer::GetDeviceContext()->UpdateSubresource(m_BoneBuffer, 0, NULL, &m_Bone, 0, 0);
 
 
     // 定数バッファ設定
     CRenderer::GetDeviceContext()->VSSetConstantBuffers(0, 1, &m_ConstantBuffer);
     CRenderer::GetDeviceContext()->VSSetConstantBuffers(1, 1, &m_LightBuffer);
+    CRenderer::GetDeviceContext()->VSSetConstantBuffers(2, 1, &m_BoneBuffer);
 
     CRenderer::GetDeviceContext()->PSSetConstantBuffers(0, 1, &m_ConstantBuffer);
     CRenderer::GetDeviceContext()->PSSetConstantBuffers(1, 1, &m_LightBuffer);
+    //CRenderer::GetDeviceContext()->PSSetConstantBuffers(2, 1, &m_BoneBuffer);
 
 }

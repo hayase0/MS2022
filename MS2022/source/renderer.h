@@ -19,13 +19,13 @@ struct VERTEX_3D {
     XMFLOAT2 TexCoord;
 };
 
-struct VERTEX_3D_NORMAL {
+struct VERTEX_3D_ANIMATION {
     XMFLOAT3 Position;
     XMFLOAT3 Normal;
-    XMFLOAT3 Binormal;
-    XMFLOAT3 Tangent;
     XMFLOAT4 Diffuse;
     XMFLOAT2 TexCoord;
+    float BoneWeight[4];
+    unsigned int BoneNo[4];
 };
 
 // êFç\ë¢ëÃ
@@ -77,6 +77,7 @@ struct LIGHT {
 class CVertexBuffer;
 class CIndexBuffer;
 class CTexture;
+class CTextureWIC;
 
 class CRenderer {
 private:
@@ -111,6 +112,7 @@ public:
     static void SetVertexBuffers(ID3D11Buffer* VertexBuffer, unsigned int stride = sizeof(VERTEX_3D));
     static void SetIndexBuffer(ID3D11Buffer* IndexBuffer);
     static void SetTexture(CTexture* Texture, unsigned int Slot = 0);
+    static void SetTexture(CTextureWIC* Texture, unsigned int Slot = 0);
 
     static void DrawIndexed(unsigned int IndexCount, unsigned int StartIndexLocation, int BaseVertexLocation);
 

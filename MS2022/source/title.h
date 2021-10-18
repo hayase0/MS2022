@@ -1,30 +1,25 @@
-/*==================================================================================================
-    MS2022
-    [title.h]
-    ・タイトルシーン
-----------------------------------------------------------------------------------------------------
-    2021.09.27 @Author HAYASE SUZUKI
-====================================================================================================
-    History
-        210927 作成
-
-/*================================================================================================*/
 #pragma once
 
 #include "scene.h"
 
+#include "polygon.h"
+#include "camera.h"
+#include "cube.h"
+#include "player.h"
+
 #define LAYER 3
 
 class CTitle : public CScene {
-protected:
-    std::list<CGameObject*>	m_GameObject[LAYER];
-
 public:
     CTitle() {}
     ~CTitle() {}
 
     void Init() {
-
+        AddGameObject<CCamera>(0);
+        AddGameObject<CCube>(1);
+        //AddGameObject<CPlayer>(1);
+        //AddGameObject<CHitRect>(1);
+        AddGameObject<CPolygon>(2);
     }
 
     void Uninit() {

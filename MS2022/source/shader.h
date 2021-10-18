@@ -1,16 +1,6 @@
-/*==================================================================================================
-    MS2022
-    [shader.h]
-    ・シェーダー
-----------------------------------------------------------------------------------------------------
-    2021.09.27 @Author HAYASE SUZUKI
-====================================================================================================
-    History
-        210927 作成
-
-/*================================================================================================*/
 #pragma once
-
+#define MAX_BONE 100
+#include <map>
 
 struct CONSTANT {
 
@@ -31,6 +21,9 @@ private:
     ID3D11Buffer* m_LightBuffer;
     LIGHT					m_Light;
 
+    ID3D11Buffer* m_BoneBuffer;
+    XMFLOAT4X4					m_Bone[MAX_BONE];
+
 public:
     void Init(const char* VertexShader, const char* PixelShader);
     void Uninit();
@@ -40,7 +33,11 @@ public:
     void SetViewMatrix(XMFLOAT4X4* ViewMatrix) { m_Constant.ViewMatrix = Transpose(ViewMatrix); }
     void SetProjectionMatrix(XMFLOAT4X4* ProjectionMatrix) { m_Constant.ProjectionMatrix = Transpose(ProjectionMatrix); }
     void SetLight(LIGHT Light) { m_Light = Light; }
-
+    void SetBoneMatrix(XMFLOAT4X4* BoneMatrix, int size) {
+        for (int i = 0; i < size; i++) {
+            m_Bone[i] = BoneMatrix[i];
+        }
+    }
 
     XMFLOAT4X4 Transpose(XMFLOAT4X4* Matrix) {
         XMFLOAT4X4 outMatrix;

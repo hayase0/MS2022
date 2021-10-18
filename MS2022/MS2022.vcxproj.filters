@@ -39,6 +39,30 @@
     <ClCompile Include="source\frame_rate.cpp">
       <Filter>system</Filter>
     </ClCompile>
+    <ClCompile Include="source\camera.cpp">
+      <Filter>gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="source\cube.cpp">
+      <Filter>gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="source\player.cpp">
+      <Filter>gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="source\polygon.cpp">
+      <Filter>gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="source\animation_model.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="source\model.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="source\texture_wic.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="source\WICTextureLoader11.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main.h">
@@ -77,5 +101,34 @@
     <ClInclude Include="source\frame_rate.h">
       <Filter>system</Filter>
     </ClInclude>
+    <ClInclude Include="source\camera.h">
+      <Filter>gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="source\cube.h">
+      <Filter>gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="source\player.h">
+      <Filter>gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="source\polygon.h">
+      <Filter>gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="source\animation_model.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+    <ClInclude Include="source\model.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+    <ClInclude Include="source\texture_wic.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+    <ClInclude Include="source\WICTextureLoader11.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="source\shaderPS.hlsl" />
+    <FxCompile Include="source\shaderVS.hlsl" />
+    <FxCompile Include="source\skinningVS.hlsl" />
   </ItemGroup>
 </Project>
