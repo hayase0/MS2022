@@ -34,7 +34,7 @@ XMFLOAT4X4		        CRenderer::m_ProjectionMatrix;
 
 void CRenderer::Init() {
     HRESULT hr = S_OK;
-
+    
     // デバイス、スワップチェーン、コンテキスト生成
     DXGI_SWAP_CHAIN_DESC sd;
     ZeroMemory(&sd, sizeof(sd));
@@ -202,7 +202,7 @@ void CRenderer::Uninit() {
 void CRenderer::Begin() {
     m_ImmediateContext->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
 
-    float ClearColor[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
+    float ClearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
     m_ImmediateContext->ClearRenderTargetView(m_RenderTargetView, ClearColor);
     m_ImmediateContext->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }

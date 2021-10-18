@@ -16,8 +16,8 @@ public:
 
     void Init() {
         AddGameObject<CCamera>(0);
-        AddGameObject<CCube>(1);
-        //AddGameObject<CPlayer>(1);
+        //AddGameObject<CCube>(1);
+        AddGameObject<CPlayer>(1);
         //AddGameObject<CHitRect>(1);
         AddGameObject<CPolygon>(2);
     }
