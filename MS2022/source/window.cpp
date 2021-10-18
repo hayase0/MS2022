@@ -29,7 +29,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
         break;
 
     case WM_CLOSE:
-        if (MessageBox(hWnd, "終了してよろしいですか？", "終了", MB_OKCANCEL | MB_DEFBUTTON2) == IDOK) {
+        if (MessageBox(hWnd, "終了してよろしいですか？", "終了確認", MB_OKCANCEL | MB_DEFBUTTON2) == IDOK) {
             DestroyWindow(hWnd);
         }
         return 0;
@@ -55,7 +55,7 @@ void CWindow::Initialize(HINSTANCE hInstance) {
         hInstance,
         NULL,
         LoadCursor(NULL, IDC_ARROW),
-        (HBRUSH)(COLOR_WINDOW + 1),
+        (HBRUSH)(COLOR_BACKGROUND + 1),
         NULL,
         CLASS_NAME,
         NULL
@@ -64,12 +64,22 @@ void CWindow::Initialize(HINSTANCE hInstance) {
     // ウィンドウクラスの登録
     RegisterClassEx(&wcex);
 
+
+    DWORD window_style;
+
+    if (MessageBox(g_Window, "フルスクリーンで起動しますか？", "起動設定", MB_YESNO | MB_DEFBUTTON2) == IDYES) {
+        window_style = WS_VISIBLE | WS_POPUP;
+    }
+    else {
+        window_style = WS_OVERLAPPEDWINDOW & ~(WS_MAXIMIZEBOX | WS_THICKFRAME);
+    }
+
     // ウィンドウの作成
     g_Window = CreateWindowEx(
         0,
         CLASS_NAME,
         WINDOW_NAME,
-        WS_OVERLAPPEDWINDOW,
+        window_style,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
         (SCREEN_WIDTH + GetSystemMetrics(SM_CXDLGFRAME) * 2),

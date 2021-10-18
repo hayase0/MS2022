@@ -13,7 +13,6 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#define VALUE_FPS (60) // フレームレート
 
 #include <stdio.h>
 #include <windows.h>

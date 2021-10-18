@@ -14,6 +14,8 @@
 
 #define CLASS_NAME      "MS2022AppClass"
 #define WINDOW_NAME     "MS2022"
+
+#define FULL_SCREEN
 #define SCREEN_WIDTH    (1920)      // ウインドウの幅
 #define SCREEN_HEIGHT   (1080)      // ウインドウの高さ
 
