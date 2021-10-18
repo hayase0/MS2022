@@ -50,8 +50,7 @@ public:
 
     CGameObject() {}
 
-    ~CGameObject() {
-    }
+    ~CGameObject() {}
 
     virtual void Uninit() {
     }
