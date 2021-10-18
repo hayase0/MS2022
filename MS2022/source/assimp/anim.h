@@ -58,7 +58,7 @@ extern "C" {
 struct aiVectorKey
 {
     /** The time of this key */
-    double mTime;
+    double mTime = NULL;
 
     /** The value of this key */
     C_STRUCT aiVector3D mValue;
@@ -101,7 +101,7 @@ struct aiVectorKey
 struct aiQuatKey
 {
     /** The time of this key */
-    double mTime;
+    double mTime = NULL;
 
     /** The value of this key */
     C_STRUCT aiQuaternion mValue;
@@ -141,13 +141,13 @@ struct aiQuatKey
 struct aiMeshKey
 {
     /** The time of this key */
-    double mTime;
+    double mTime = NULL;
 
     /** Index into the aiMesh::mAnimMeshes array of the
      *  mesh coresponding to the #aiMeshAnim hosting this
      *  key frame. The referenced anim mesh is evaluated
      *  according to the rules defined in the docs for #aiAnimMesh.*/
-    unsigned int mValue;
+    unsigned int mValue = NULL;
 
 #ifdef __cplusplus
 

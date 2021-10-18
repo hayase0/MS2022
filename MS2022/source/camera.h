@@ -8,11 +8,11 @@ private:
 
 	static CCamera* m_Instance;      // インスタンス
 
-	RECT m_Viewport;                 // ビューポート
+	RECT m_Viewport = RECT();		 // ビューポート
 
-	XMFLOAT4X4	m_ViewMatrix;        // ビューマトリクス
-	XMFLOAT4X4	m_InvViewMatrix;     // ビュー転置マトリクス
-	XMFLOAT4X4	m_ProjectionMatrix;  // プロジェクションマトリクス
+	XMFLOAT4X4	m_ViewMatrix = XMFLOAT4X4();		 // ビューマトリクス
+	XMFLOAT4X4	m_InvViewMatrix = XMFLOAT4X4();      // ビュー転置マトリクス
+	XMFLOAT4X4	m_ProjectionMatrix = XMFLOAT4X4();   // プロジェクションマトリクス
 
 
 public:
