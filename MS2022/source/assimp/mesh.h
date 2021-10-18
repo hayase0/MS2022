@@ -201,11 +201,11 @@ struct aiFace
 struct aiVertexWeight
 {
     //! Index of the vertex which is influenced by the bone.
-    unsigned int mVertexId;
+    unsigned int mVertexId = NULL;
 
     //! The strength of the influence in the range (0...1).
     //! The influence from all bones at one vertex amounts to 1.
-    float mWeight;
+    float mWeight = NULL;
 
 #ifdef __cplusplus
 
@@ -240,7 +240,7 @@ struct aiBone
     unsigned int mNumWeights;
 
     //! The vertices affected by this bone
-    C_STRUCT aiVertexWeight* mWeights;
+    C_STRUCT aiVertexWeight* mWeights = NULL;
 
     //! Matrix that transforms from mesh space to bone space in bind pose
     C_STRUCT aiMatrix4x4 mOffsetMatrix;

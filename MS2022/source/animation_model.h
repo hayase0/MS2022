@@ -24,7 +24,7 @@ struct BONE {
     aiMatrix4x4 Matrix;
     aiMatrix4x4 AnimationMatrix;
     aiMatrix4x4 OffsetMatrix;
-    int No;
+    int No = NULL;
 };
 
 class CAnimationModel {

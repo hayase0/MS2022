@@ -13,7 +13,7 @@ void CAnimationModel::Update() {
             BrendAnimation();
 
         else {
-            int frame = m_Frame1;
+            int frame = (int)m_Frame1;
             //アニメーションデータからボーンマトリクス算出
             aiAnimation* animation = m_Animation[m_NowAnimationName]->mAnimations[0];
 
@@ -384,7 +384,7 @@ void CAnimationModel::Load(const char *FileName) {
                 if (path.data[0] == '*') {
                     //FBXファイル内から読み込み
                     if (m_Texture[path.data] == nullptr) {
-                        ID3D11Resource* resource;
+                        //ID3D11Resource* resource;
                         CTextureWIC* texture;
                         texture = new CTextureWIC;
                         int id = atoi(&path.data[1]);
@@ -474,8 +474,8 @@ void CAnimationModel::BrendAnimation() {
     aiAnimation* animation2 = m_Animation[m_NextAnimationName]->mAnimations[0];
 
     int frame1, frame2;
-    frame1 = m_Frame1;
-    frame2 = m_Frame2;
+    frame1 = (int)m_Frame1;
+    frame2 = (int)m_Frame2;
     for (unsigned int c = 0; c < animation1->mNumChannels; c++) {
         aiNodeAnim* nodeAnim = animation1->mChannels[c];
         aiNodeAnim* nodeAnim2 = animation2->mChannels[c];
