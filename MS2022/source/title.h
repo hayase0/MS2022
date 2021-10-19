@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "cube.h"
 #include "player.h"
+#include "stage.h"
 
 #define LAYER 3
 
@@ -18,8 +19,10 @@ public:
         AddGameObject<CCamera>(0);
         //AddGameObject<CCube>(1);
         AddGameObject<CPlayer>(1);
+		AddGameObject<CStage>(1);
         //AddGameObject<CHitRect>(1);
         AddGameObject<CPolygon>(2);
+
     }
 
     void Uninit() {
