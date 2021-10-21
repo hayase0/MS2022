@@ -386,9 +386,8 @@ void CModel::LoadMaterial(const char* FileName, MODEL_MATERIAL** MaterialArray, 
 
 
         if (strcmp(str, "newmtl") == 0) {
-            mc++;
             //マテリアル名
-            (void)fscanf(file, "%s", materialArray[mc].Name);
+            (void)fscanf(file, "%s", materialArray[mc + 1].Name);
             strcpy(materialArray[mc + 1].TextureName, "");
         }
         else if (strcmp(str, "Ka") == 0) {
@@ -422,7 +421,7 @@ void CModel::LoadMaterial(const char* FileName, MODEL_MATERIAL** MaterialArray, 
         }
         else if (strcmp(str, "map_Kd") == 0) {
             //テクスチャ
-            (void)fscanf(file, "%s", str);
+            (void)(file, "%s", str);
 
             char path[256];
             strcpy(path, "Assets/Models/");
