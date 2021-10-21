@@ -62,12 +62,12 @@ void CCamera::Update()
 
 
 //---211021 suzuki ƒJƒƒ‰ˆÚ“®
-	/*if (CInput::GetKeyPress(VK_LEFT)) {
+	if (CInput::GetKeyPress(VK_LEFT)) {
 		m_OffsetRad -= 0.05f;
 	}
 	if (CInput::GetKeyPress(VK_RIGHT)) {
 		m_OffsetRad += 0.05f;
-	}*/
+	}
 
 	m_Position.x = m_Target.x + m_OffsetRaius * sinf(m_OffsetRad);
 	m_Position.y = m_Target.y + 5.0f;

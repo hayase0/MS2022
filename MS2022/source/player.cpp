@@ -12,6 +12,8 @@
 #include "player.h"
 #include "camera.h"
 #include "input.h"
+#include "manager.h"
+#include "scene.h"
 
 #define SPEED 0.5f
 
@@ -48,22 +50,30 @@ void CPlayer::Update() {
 	else
 		m_AnimModel->SetAnimation("Idle");
 	
-
+	CCamera* cam = CManager::GetScene()->GetGameObject<CCamera>();
 	if (CInput::GetKeyPress('W')) {
-		m_Position.z += SPEED;
-		m_Rotation.y = XM_PI;
+		m_Position.x += cam->GetForward().x;
+		//m_Position.y += cam->GetForward().y;
+		m_Position.z += cam->GetForward().z;
+		m_Rotation.y = atan2f(cam->GetForward().x, cam->GetForward().z) + XM_PI;
 	}
 	if (CInput::GetKeyPress('S')) {
-		m_Position.z -= SPEED;
-		m_Rotation.y = 0.0f;
+		m_Position.x -= cam->GetForward().x;
+		//m_Position.y += cam->GetForward().y;
+		m_Position.z -= cam->GetForward().z;
+		m_Rotation.y = atan2f(cam->GetForward().x, cam->GetForward().z);
 	}
 	if (CInput::GetKeyPress('D')) {
-		m_Position.x += SPEED;
-		m_Rotation.y = -XM_PI * 0.5f;
+		m_Position.x += cam->GetRight().x;
+		//m_Position.y += cam->GetForward().y;
+		m_Position.z += cam->GetRight().z;
+		m_Rotation.y = atan2f(cam->GetForward().x, cam->GetForward().z) - XM_PI / 2;
 	}
 	if (CInput::GetKeyPress('A')) {
-		m_Position.x -= SPEED;
-		m_Rotation.y = XM_PI * 0.5f;
+		m_Position.x -= cam->GetRight().x;
+		//m_Position.y += cam->GetForward().y;
+		m_Position.z -= cam->GetRight().z;
+		m_Rotation.y = atan2f(cam->GetForward().x, cam->GetForward().z) + XM_PI / 2;
 	}
 
 

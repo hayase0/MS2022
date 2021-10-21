@@ -43,6 +43,12 @@ public:
 	//void DrawShadow();
 	//void DrawWater();
 
+	XMFLOAT3 GetForward() {
+		return XMFLOAT3(m_ViewMatrix._13, m_ViewMatrix._23, m_ViewMatrix._33);
+	}
+	XMFLOAT3 GetRight() {
+		return XMFLOAT3(m_ViewMatrix._11, m_ViewMatrix._21, m_ViewMatrix._31);
+	}
 
 	XMFLOAT4X4	GetViewMatrix() { return m_ViewMatrix; }
 	XMFLOAT4X4	GetInvViewMatrix() { return m_InvViewMatrix; }
