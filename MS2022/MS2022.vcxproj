@@ -23,19 +23,19 @@
     <ProjectGuid>{79D12FA6-C22C-4385-ABC1-0BFC34121D9E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MS2022</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -158,6 +158,7 @@
     <ClCompile Include="source\polygon.cpp" />
     <ClCompile Include="source\renderer.cpp" />
     <ClCompile Include="source\shader.cpp" />
+    <ClCompile Include="source\stage.cpp" />
     <ClCompile Include="source\texture.cpp" />
     <ClCompile Include="source\texture_wic.cpp" />
     <ClCompile Include="source\WICTextureLoader11.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="source\result.h" />
     <ClInclude Include="source\scene.h" />
     <ClInclude Include="source\shader.h" />
+    <ClInclude Include="source\stage.h" />
     <ClInclude Include="source\texture.h" />
     <ClInclude Include="source\texture_wic.h" />
     <ClInclude Include="source\title.h" />
