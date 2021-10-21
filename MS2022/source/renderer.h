@@ -13,10 +13,10 @@
 
 // 頂点構造体
 struct VERTEX_3D {
-    XMFLOAT3 Position;
-    XMFLOAT3 Normal;
-    XMFLOAT4 Diffuse;
-    XMFLOAT2 TexCoord;
+    XMFLOAT3 Position = XMFLOAT3();
+    XMFLOAT3 Normal = XMFLOAT3();
+    XMFLOAT4 Diffuse = XMFLOAT4();
+    XMFLOAT2 TexCoord = XMFLOAT2();
 };
 
 struct VERTEX_3D_ANIMATION {
@@ -46,31 +46,31 @@ struct COLOR {
 
 // マテリアル構造体
 struct MATERIAL {
-    COLOR		Ambient;
-    COLOR		Diffuse;
-    COLOR		Specular;
-    COLOR		Emission;
-    float		Shininess;
-    float		Dummy[3];//16bit境界用
+    COLOR		Ambient = COLOR();
+    COLOR		Diffuse = COLOR();
+    COLOR		Specular = COLOR();
+    COLOR		Emission = COLOR();
+    float		Shininess = 0.0f;
+    float		Dummy[3] = { 0.0f };//16bit境界用
 };
 
 // マテリアル構造体
 struct DX11_MODEL_MATERIAL {
-    MATERIAL		Material;
-    class CTexture* Texture;
+    MATERIAL		Material = MATERIAL();
+    class CTexture* Texture = nullptr;
 };
 
 // 描画サブセット構造体
 struct DX11_SUBSET {
-    unsigned short	StartIndex;
-    unsigned short	IndexNum;
-    DX11_MODEL_MATERIAL	Material;
+    unsigned short	StartIndex = 0;
+    unsigned short	IndexNum = 0;
+    DX11_MODEL_MATERIAL	Material = DX11_MODEL_MATERIAL();
 };
 
 struct LIGHT {
-    XMFLOAT4	Direction;
-    COLOR		Diffuse;
-    COLOR		Ambient;
+    XMFLOAT4	Direction = XMFLOAT4();
+    COLOR		Diffuse = COLOR();
+    COLOR		Ambient = COLOR();
 };
 
 

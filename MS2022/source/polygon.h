@@ -9,10 +9,10 @@ class CPolygon : public CGameObject
 private:
 
 	ID3D11Buffer*	m_VertexBuffer = NULL; // 頂点バッファ
-	CShader*		m_Shader;              // シェーダー
+	CShader*		m_Shader = NULL;       // シェーダー
 
-	CTexture*		m_Texture;             // テクスチャ
-	CTextureWIC*    m_TextureWic;
+	CTexture*		m_Texture = NULL;      // テクスチャ
+	CTextureWIC*    m_TextureWic = NULL;
 
 public:
 	void Init();
