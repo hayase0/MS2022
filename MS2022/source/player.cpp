@@ -11,6 +11,10 @@
 /*================================================================================================*/
 #include "player.h"
 #include "camera.h"
+#include "input.h"
+
+#define SPEED 0.5f
+
 
 void CPlayer::Init() {
 	m_AnimModel = new CAnimationModel();
@@ -22,10 +26,10 @@ void CPlayer::Init() {
 	m_Shader->Init("skinningVS.cso", "shaderPS.cso");
 
 	m_Position = XMFLOAT3(0.0f, -5.0f, 10.0f);
-	m_Rotation = XMFLOAT3(0.0f, XM_PI * 0.5f, 0.0f);
+	m_Rotation = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	m_Scale = XMFLOAT3(0.05f, 0.05f, 0.05f);
 
-	m_AnimModel->SetAnimation("Run");
+	m_AnimModel->SetAnimation("Idle");
 }
 
 void CPlayer::Uninit() {
@@ -38,7 +42,32 @@ void CPlayer::Uninit() {
 
 void CPlayer::Update() {
 	//m_Rotation.y += 0.02f;
-	m_Frame += 1;
+	if (CInput::GetKeyPress('W') || CInput::GetKeyPress('S') ||
+		CInput::GetKeyPress('D') || CInput::GetKeyPress('A'))
+		m_AnimModel->SetAnimation("Run");
+	else
+		m_AnimModel->SetAnimation("Idle");
+	
+
+	if (CInput::GetKeyPress('W')) {
+		m_Position.z += SPEED;
+		m_Rotation.y = XM_PI;
+	}
+	if (CInput::GetKeyPress('S')) {
+		m_Position.z -= SPEED;
+		m_Rotation.y = 0.0f;
+	}
+	if (CInput::GetKeyPress('D')) {
+		m_Position.x += SPEED;
+		m_Rotation.y = -XM_PI * 0.5f;
+	}
+	if (CInput::GetKeyPress('A')) {
+		m_Position.x -= SPEED;
+		m_Rotation.y = XM_PI * 0.5f;
+	}
+
+
+
 	m_AnimModel->Update();
 }
 

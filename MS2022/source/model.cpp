@@ -384,12 +384,13 @@ void CModel::LoadMaterial(const char* FileName, MODEL_MATERIAL** MaterialArray, 
         if (feof(file) != 0)
             break;
 
-
         if (strcmp(str, "newmtl") == 0) {
             mc++;
-            //マテリアル名
-            (void)fscanf(file, "%s", materialArray[mc].Name);
-            strcpy(materialArray[mc].TextureName, "");
+            if (mc < materialNum) {
+                //マテリアル名
+                (void)fscanf(file, "%s", materialArray[mc].Name);
+                strcpy(materialArray[mc].TextureName, "");
+            }
         }
         else if (strcmp(str, "Ka") == 0) {
             //アンビエント

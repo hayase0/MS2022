@@ -66,6 +66,9 @@
     <ClCompile Include="source\stage.cpp">
       <Filter>gameobject</Filter>
     </ClCompile>
+    <ClCompile Include="source\input.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main.h">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="source\stage.h">
       <Filter>gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="source\input.h">
+      <Filter>system</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

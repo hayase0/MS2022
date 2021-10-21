@@ -17,6 +17,7 @@
 #include "window.h"
 
 #include "title.h"
+#include "input.h"
 
 
 CCamera* CCamera::m_Instance = nullptr;
@@ -53,12 +54,25 @@ void CCamera::Update()
 	m_Target = player->GetPosition();
 	m_Target.y += 7.0f;
 	
-	XMFLOAT3 forward = player->GetForward();
+	/*XMFLOAT3 forward = player->GetForward();
 	m_Position.x = m_Target.x + forward.x * 5.0f;
 	m_Position.y = m_Target.y + forward.y * 5.0f;
-	m_Position.z = m_Target.z + forward.z * 5.0f;
+	m_Position.z = m_Target.z + forward.z * 5.0f;*/
 //---------------------------
 
+
+//---211021 suzuki ÉJÉÅÉâà⁄ìÆ
+	/*if (CInput::GetKeyPress(VK_LEFT)) {
+		m_OffsetRad -= 0.05f;
+	}
+	if (CInput::GetKeyPress(VK_RIGHT)) {
+		m_OffsetRad += 0.05f;
+	}*/
+
+	m_Position.x = m_Target.x + m_OffsetRaius * sinf(m_OffsetRad);
+	m_Position.y = m_Target.y + 5.0f;
+	m_Position.z = m_Target.z + m_OffsetRaius * cosf(m_OffsetRad);
+//---------------------------
 
 
 	/*XMFLOAT3 left, front;

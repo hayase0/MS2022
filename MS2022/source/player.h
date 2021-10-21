@@ -19,12 +19,9 @@
 class CPlayer : public CGameObject {
 private:
 	CAnimationModel* m_AnimModel = NULL;
-	float m_Frame = NULL;
 	CShader* m_Shader = NULL;
 
 public:
-	/*CCube();
-	~CCube();*/
 
 	void Init();
 	void Uninit();

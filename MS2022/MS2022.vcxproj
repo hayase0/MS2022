@@ -151,6 +151,7 @@
     <ClCompile Include="source\camera.cpp" />
     <ClCompile Include="source\cube.cpp" />
     <ClCompile Include="source\frame_rate.cpp" />
+    <ClCompile Include="source\input.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\manager.cpp" />
     <ClCompile Include="source\model.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="source\frame_rate.h" />
     <ClInclude Include="source\game.h" />
     <ClInclude Include="source\game_object.h" />
+    <ClInclude Include="source\input.h" />
     <ClInclude Include="source\main.h" />
     <ClInclude Include="source\manager.h" />
     <ClInclude Include="source\model.h" />

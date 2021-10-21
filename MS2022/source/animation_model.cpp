@@ -71,7 +71,7 @@ void CAnimationModel::Update() {
         m_BoneMatrix[i]._44 = itr->second.Matrix.d4;
         i++;
     }
-    // 頂点変換(CPUスキニング)
+    /* 頂点変換(CPUスキニング)
     //for (unsigned int m = 0; m < m_Scene->mNumMeshes; m++) {
     //    aiMesh* mesh = m_Scene->mMeshes[m];
 
@@ -204,7 +204,7 @@ void CAnimationModel::Update() {
     //        vertex[v].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     //    }
     //    CRenderer::GetDeviceContext()->Unmap(m_VertexBuffer[m], 0);
-    //}
+    }*/
 }
 
 void CAnimationModel::Draw() {
@@ -525,7 +525,7 @@ void CAnimationModel::BrendAnimation() {
         return;
     }
 
-    m_Per += 0.02f;
+    m_Per += 0.1f;
     m_Frame2 += 1.0f;
 }
 
@@ -536,9 +536,10 @@ void CAnimationModel::SetAnimation(const char* AnimationName) {
     if (strcmp(m_NowAnimationName, "NONE") == 0) {
         strcpy(m_NowAnimationName, AnimationName);
     }
-    else {
+    else if (strcmp(m_NextAnimationName, "NONE") == 0){
         if (strcmp(m_NowAnimationName, AnimationName) != 0) {
             strcpy(m_NextAnimationName, AnimationName);
         }
     }
+
 }

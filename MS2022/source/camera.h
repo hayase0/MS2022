@@ -20,6 +20,8 @@ private:
 //---211021 hirano
 	XMFLOAT3 m_Target;
 //----------------
+	float m_OffsetRad = XM_PI;
+	float m_OffsetRaius = 20.0f;
 
 	static CCamera* m_Instance;      // インスタンス
 
