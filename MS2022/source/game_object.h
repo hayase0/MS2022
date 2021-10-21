@@ -7,7 +7,7 @@
 ====================================================================================================
     History
         211015 作成
-
+        211021 hirano GetForward関数追加(オブジェクトがどこを向いているかを取得する)
 /*================================================================================================*/
 #pragma once
 
@@ -34,6 +34,23 @@ public:
     void SetPosition(XMFLOAT3 Position) { m_Position = Position; }
     void SetRotation(XMFLOAT3 Rotation) { m_Rotation = Rotation; }
     void SetScale(XMFLOAT3 Scale) { m_Scale = Scale; }
+
+    //---211021 hirano GetForward関数
+    XMFLOAT3 GetForward() {
+        XMMATRIX rot;
+        rot = XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z);
+
+        XMFLOAT4X4 rotf;
+        XMStoreFloat4x4(&rotf, rot);
+
+        XMFLOAT3 forward;
+        forward.x = rotf._31;
+        forward.y = rotf._32;
+        forward.z = rotf._33;
+
+        return forward;
+    }
+    //----------------
 
     void SetDestroy() { m_Destroy = true; }
     bool Destroy() {
