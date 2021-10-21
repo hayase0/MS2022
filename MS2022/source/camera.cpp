@@ -1,8 +1,22 @@
+/*==================================================================================================
+	MS2022
+	[camera.cpp]
+	・カメラ
+----------------------------------------------------------------------------------------------------
+	2021.10.15 @Author HAYASE SUZUKI
+====================================================================================================
+	History
+		211015 作成
+		211021 hirano カメラのプレイヤー追従処理追加
+
+/*================================================================================================*/
 
 #include "main.h"
 #include "renderer.h"
+#include "manager.h"
 #include "window.h"
-#include "camera.h"
+
+#include "title.h"
 
 
 CCamera* CCamera::m_Instance = nullptr;
@@ -32,6 +46,20 @@ void CCamera::Uninit()
 
 void CCamera::Update()
 {
+
+//---211021 hirano プレイヤー追従
+	CPlayer* player = CManager::GetScene()->GetGameObject<CPlayer>();
+	
+	m_Target = player->GetPosition();
+	m_Target.y += 7.0f;
+	
+	XMFLOAT3 forward = player->GetForward();
+	m_Position.x = m_Target.x + forward.x * 5.0f;
+	m_Position.y = m_Target.y + forward.y * 5.0f;
+	m_Position.z = m_Target.z + forward.z * 5.0f;
+//---------------------------
+
+
 
 	/*XMFLOAT3 left, front;
 
@@ -96,14 +124,21 @@ void CCamera::Draw()
 	CRenderer::GetDeviceContext()->RSSetViewports(1, &dxViewport);
 
 	// ビューマトリクス設定
-	XMMATRIX invViewMatrix = XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z);
+	/*XMMATRIX invViewMatrix = XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z);
 	invViewMatrix *= XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z);
 
 	XMVECTOR det;
 	XMMATRIX viewMatrix = XMMatrixInverse(&det, invViewMatrix);
 
 	DirectX::XMStoreFloat4x4(&m_InvViewMatrix, invViewMatrix);
+	DirectX::XMStoreFloat4x4(&m_ViewMatrix, viewMatrix);*/
+
+//---211021 hirano プレイヤー追従
+	XMFLOAT3 UpDir = { 0.0f,1.0f,0.0f };
+	XMMATRIX viewMatrix = XMMatrixLookAtLH(XMLoadFloat3(&m_Position), XMLoadFloat3(&m_Target), XMLoadFloat3(&UpDir));
 	DirectX::XMStoreFloat4x4(&m_ViewMatrix, viewMatrix);
+//------------------------
+
 	CRenderer::SetViewMatrix(m_ViewMatrix);
 
 	//CRenderer::SetViewMatrix(&m_ViewMatrix);
