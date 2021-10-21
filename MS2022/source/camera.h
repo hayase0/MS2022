@@ -18,7 +18,7 @@ class CCamera : public CGameObject
 private:
 
 //---211021 hirano
-	XMFLOAT3 m_Target;
+	XMFLOAT3 m_Target = XMFLOAT3();
 //----------------
 	float m_OffsetRad = XM_PI;
 	float m_OffsetRaius = 20.0f;

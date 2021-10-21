@@ -19,7 +19,7 @@ void CStage::Init() {
 	m_Shader = new CShader();
 	m_Shader->Init("shaderVS.cso", "shaderPS.cso");
 
-	m_Position = XMFLOAT3(0.0f, -20.0f, 0.0f);
+	m_Position = XMFLOAT3(0.0f, -14.5f, 0.0f);
 	m_Rotation = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	m_Scale = XMFLOAT3(20.0f, 20.0f, 20.0f);
 }
