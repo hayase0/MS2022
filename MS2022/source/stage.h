@@ -18,9 +18,9 @@
 // キューブクラス（ゲームオブジェクト）
 class CStage : public CGameObject {
 private:
-	CModel* m_Model;
+	CModel* m_Model = nullptr;
 
-	CShader* m_Shader;
+	CShader* m_Shader = nullptr;
 
 public:
 
