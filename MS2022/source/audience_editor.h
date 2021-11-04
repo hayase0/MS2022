@@ -15,6 +15,9 @@ class CAudienceEditor {
 private:
     static CAudienceEditor* m_Instance;
 
+    bool m_Confirm = false;
+    bool m_ConfirmAction = false;
+
     int m_CurrendId = 0;
     int m_ActionId = 0;
 

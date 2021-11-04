@@ -22,7 +22,7 @@
 class CAudience : public CGameObject {
 private:
 	AUDIENCE m_Data;
-	int m_ActionIdx = 0;
+	unsigned int m_ActionIdx = 0;
 
 	CAnimationModel* m_AnimModel = NULL;
 	CShader* m_Shader = NULL;
@@ -58,6 +58,7 @@ public:
 	void SetStartPos(XMFLOAT3 pos) { m_Data.startpos = pos; }
 
 	void AddAction(CAction ac) { m_Data.action.push_back(ac); }
+	void RemoveAction(int id) { m_Data.action.erase(m_Data.action.begin() + id); }
 	CAction* GetAction(int id) { return &m_Data.action[id]; }
 
 	int GetActionNum() { return m_Data.action.size(); }

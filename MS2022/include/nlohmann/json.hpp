@@ -26,6 +26,7 @@ LIABILITY, WHETHER IN AN ACTION OF  CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE  OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+#pragma warning( disable : 26495 )
 
 #ifndef INCLUDE_NLOHMANN_JSON_HPP_
 #define INCLUDE_NLOHMANN_JSON_HPP_
@@ -2156,7 +2157,6 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     ///////////////////////////////////////
     // other constructors and destructor //
     ///////////////////////////////////////
-
     template<typename JsonRef,
              detail::enable_if_t<detail::conjunction<detail::is_json_ref<JsonRef>,
                                  std::is_same<typename JsonRef::value_type, basic_json>>::value, int> = 0 >

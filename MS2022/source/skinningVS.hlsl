@@ -46,5 +46,6 @@ void main(in VS_IN In, out VS_OUT Out) {
 	Out.pos = mul(pos, wvp);
 	Out.diff = In.diff;
 	Out.tex = In.tex;
+	Out.nor = In.nor;
 }
 

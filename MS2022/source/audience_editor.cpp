@@ -28,10 +28,26 @@ void CAudienceEditor::Draw() {
     if (ImGui::Button("Add")) {
         CManager::GetScene()->AddGameObject<CAudience>(1);
     }
+    ImGui::SameLine();
+    if (ImGui::Button("Remove")) {
+        m_Confirm = true;
+    }
+    if (m_Confirm) {
+        ImGui::Begin("Confirm");
+        if (ImGui::Button("OK")) {
+            audiences[m_CurrendId]->SetDestroy();
+            m_Confirm = false;
+        }
+
+        ImGui::SameLine();
+        if (ImGui::Button("Cancel"))
+            m_Confirm = false;
+        ImGui::End();
+    }
 
     ImGui::SliderInt("CurrentID", &m_CurrendId, 0, max(audiences.size() - 1, 0));
     if (audiences.size() > m_CurrendId) {
-        float trans[3], rot[3], scl[3];
+        float trans[3];
         trans[0] = audiences[m_CurrendId]->GetData().startpos.x;
         trans[1] = audiences[m_CurrendId]->GetData().startpos.y;
         trans[2] = audiences[m_CurrendId]->GetData().startpos.z;
@@ -53,19 +69,36 @@ void CAudienceEditor::Draw() {
 
         ImGui::Separator();
         if (ImGui::Button("AddAction")) {
-            if(audiences[m_CurrendId]->GetActionNum() != 0)
-            audiences[m_CurrendId]->AddAction(*audiences[m_CurrendId]->GetAction(audiences[m_CurrendId]->GetActionNum() - 1));
+            if (audiences[m_CurrendId]->GetActionNum() != 0)
+                audiences[m_CurrendId]->AddAction(*audiences[m_CurrendId]->GetAction(audiences[m_CurrendId]->GetActionNum() - 1));
             else {
                 CAction ac(60.0f, XMFLOAT3(0, 0, 0), "Idle");
                 audiences[m_CurrendId]->AddAction(ac);
             }
         }
+        ImGui::SameLine();
+        if (ImGui::Button("RemoveAction")) {
+            m_ConfirmAction = true;
+        }
+        if (m_ConfirmAction) {
+            ImGui::Begin("Confirm");
+            if (ImGui::Button("OK")) {
+                audiences[m_CurrendId]->RemoveAction(m_ActionId);
+                m_ConfirmAction = false;
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Button("Cancel"))
+                m_ConfirmAction = false;
+            ImGui::End();
+        }
+
         ImGui::SliderInt("ActionID", &m_ActionId, 0, max(audiences[m_CurrendId]->GetActionNum() - 1, 0));
         if (m_ActionId < audiences[m_CurrendId]->GetActionNum()) {
             CAction* ac = audiences[m_CurrendId]->GetAction(m_ActionId);
-            int frame = ac->GetFrame();
+            int frame = (int)ac->GetFrame();
             if (ImGui::InputInt("Frame", &frame))
-                audiences[m_CurrendId]->GetAction(m_ActionId)->SetFrame(frame);
+                audiences[m_CurrendId]->GetAction(m_ActionId)->SetFrame((float)frame);
             float pos[3] = { ac->GetGoal().x, ac->GetGoal().y,ac->GetGoal().z };
             if (ImGui::InputFloat3("Goal", pos))
                 audiences[m_CurrendId]->GetAction(m_ActionId)->SetGoal(XMFLOAT3(pos[0], pos[1], pos[2]));

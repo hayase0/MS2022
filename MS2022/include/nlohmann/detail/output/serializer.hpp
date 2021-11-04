@@ -1,5 +1,5 @@
 #pragma once
-
+//#pragma warning( disable : 28 )
 #include <algorithm> // reverse, remove, fill, find, none_of
 #include <array> // array
 #include <clocale> // localeconv, lconv

@@ -15,12 +15,12 @@
 
 class CAction {
 private:
-    float m_Frame;
-    XMFLOAT3 m_Goal;
+    float m_Frame = 0;
+    XMFLOAT3 m_Goal = XMFLOAT3(0, 0, 0);
     std::string m_AnimId;
 
     float m_Counter = 0;
-    XMFLOAT3 m_Start;
+    XMFLOAT3 m_Start = XMFLOAT3(0,0,0);
 public:
     CAction(){}
     CAction(float f, XMFLOAT3 p, std::string s) : m_Frame(f),m_Goal(p),m_AnimId(s){}

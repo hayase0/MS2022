@@ -47,7 +47,7 @@ void CAudienceManager::Init() {
         audiences.push_back(tmp);
     }
 
-    for (int i = 0; i < audiences.size(); i++) {
+    for (unsigned int i = 0; i < audiences.size(); i++) {
         CAudience* p = CManager::GetScene()->AddGameObject<CAudience>(1);
         p->SetPosition(audiences[i].startpos);
         p->LoadAnimModel(m_ModelData[audiences[i].modelno].modelfile);
@@ -77,7 +77,7 @@ void CAudienceManager::Save() {
 
     std::string out = j_num.dump();
     write << out << std::endl;
-    for (int i = 0; i < dataes.size(); i++) {
+    for (unsigned int i = 0; i < dataes.size(); i++) {
         json j_vec(dataes[i]);
         out = j_vec.dump();
         write << out << std::endl;
