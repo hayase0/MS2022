@@ -19,8 +19,17 @@ HWND GetWindow() {
     return g_Window;
 }
 
+#if _DEBUG
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+#endif
+
 // ウィンドウプロシージャ
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+#if _DEBUG
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
+        return true;
+#endif DEBUG
+
     switch (uMsg) {
     case WM_KEYDOWN:
         if (wParam == VK_ESCAPE) {

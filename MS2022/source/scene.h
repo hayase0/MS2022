@@ -78,4 +78,17 @@ public:
             }
         }
     }
+
+    template <typename T>
+    std::vector<T*> GetGameObjects() {
+        std::vector<T*> objs;
+        for (int i = 0; i < LAYER; i++) {
+            for (auto p : m_GameObject[i]) {
+                if (typeid(*p) == typeid(T)) {
+                    objs.push_back(dynamic_cast<T*>(p));
+                }
+            }
+        }
+        return objs;
+    }
 };

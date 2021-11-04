@@ -91,6 +91,7 @@
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <DisableSpecificWarnings>4819;26812</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>C:\Users\hayase\Work\MS2022\MS2022\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -121,6 +122,7 @@
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DisableSpecificWarnings>4819;26812</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>C:\Users\hayase\Work\MS2022\MS2022\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -147,7 +149,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\imgui\imgui.cpp" />
+    <ClCompile Include="include\imgui\imgui_demo.cpp" />
+    <ClCompile Include="include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="include\imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="include\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="include\imgui\imgui_tables.cpp" />
+    <ClCompile Include="include\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="source\action.cpp" />
     <ClCompile Include="source\animation_model.cpp" />
+    <ClCompile Include="source\audience.cpp" />
+    <ClCompile Include="source\audience_manager.cpp" />
     <ClCompile Include="source\camera.cpp" />
     <ClCompile Include="source\cube.cpp" />
     <ClCompile Include="source\frame_rate.cpp" />
@@ -155,6 +167,7 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\manager.cpp" />
     <ClCompile Include="source\model.cpp" />
+    <ClCompile Include="source\audience_editor.cpp" />
     <ClCompile Include="source\player.cpp" />
     <ClCompile Include="source\polygon.cpp" />
     <ClCompile Include="source\renderer.cpp" />
@@ -166,7 +179,18 @@
     <ClCompile Include="source\window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\imgui\imconfig.h" />
+    <ClInclude Include="include\imgui\imgui.h" />
+    <ClInclude Include="include\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="include\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="include\imgui\imgui_internal.h" />
+    <ClInclude Include="include\imgui\imstb_rectpack.h" />
+    <ClInclude Include="include\imgui\imstb_textedit.h" />
+    <ClInclude Include="include\imgui\imstb_truetype.h" />
+    <ClInclude Include="source\action.h" />
     <ClInclude Include="source\animation_model.h" />
+    <ClInclude Include="source\audience.h" />
+    <ClInclude Include="source\audience_manager.h" />
     <ClInclude Include="source\camera.h" />
     <ClInclude Include="source\cube.h" />
     <ClInclude Include="source\frame_rate.h" />
@@ -176,6 +200,7 @@
     <ClInclude Include="source\main.h" />
     <ClInclude Include="source\manager.h" />
     <ClInclude Include="source\model.h" />
+    <ClInclude Include="source\audience_editor.h" />
     <ClInclude Include="source\player.h" />
     <ClInclude Include="source\polygon.h" />
     <ClInclude Include="source\renderer.h" />

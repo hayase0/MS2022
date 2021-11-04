@@ -16,6 +16,12 @@
     <Filter Include="shader">
       <UniqueIdentifier>{03231a48-6a87-432a-b111-6c3485ab9b0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="debug">
+      <UniqueIdentifier>{19aa0ee1-7670-4ec5-8ca1-e12376eb6d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{0882b2fc-986a-4751-bffe-30c0606c4d39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -68,6 +74,39 @@
     </ClCompile>
     <ClCompile Include="source\input.cpp">
       <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audience_editor.cpp">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audience.cpp">
+      <Filter>gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_impl_dx11.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_impl_win32.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_tables.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audience_manager.cpp">
+      <Filter>debug</Filter>
+    </ClCompile>
+    <ClCompile Include="source\action.cpp">
+      <Filter>gameobject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +175,42 @@
     </ClInclude>
     <ClInclude Include="source\input.h">
       <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audience_editor.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audience.h">
+      <Filter>gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui_impl_dx11.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui_impl_win32.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imstb_rectpack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imstb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imstb_truetype.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audience_manager.h">
+      <Filter>debug</Filter>
+    </ClInclude>
+    <ClInclude Include="source\action.h">
+      <Filter>gameobject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

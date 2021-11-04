@@ -17,8 +17,8 @@
 #include "title.h"
 #include "input.h"
 
-CScene* CManager::m_Scene;
 
+CScene* CManager::m_Scene;
 
 void CManager::Init(HINSTANCE hInstance, int nCmdShow) {
     CFrameRate::Initialize();
@@ -26,6 +26,16 @@ void CManager::Init(HINSTANCE hInstance, int nCmdShow) {
     CRenderer::Init();
     CWindow::Display(nCmdShow);
     CInput::Init();
+
+#if _DEBUG
+    // ImGuièâä˙âª
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplWin32_Init(GetWindow());
+    ImGui_ImplDX11_Init(CRenderer::GetDevice(), CRenderer::GetDeviceContext());
+#endif
 
     SetScene<CTitle>();
 
@@ -35,6 +45,12 @@ void CManager::Uninit() {
 
     m_Scene->Uninit();
     delete m_Scene;
+
+#if _DEBUG
+    ImGui_ImplDX11_Shutdown();
+    ImGui_ImplWin32_Shutdown();
+    ImGui::DestroyContext();
+#endif
 
     CInput::Uninit();
     CRenderer::Uninit();
@@ -48,9 +64,21 @@ void CManager::Update() {
 }
 
 void CManager::Draw() {
+#if _DEBUG
+    ImGui_ImplDX11_NewFrame();
+    ImGui_ImplWin32_NewFrame();
+    ImGui::NewFrame();
+#endif
+
     CRenderer::Begin();
 
     m_Scene->Draw();
+
+
+#if _DEBUG
+    ImGui::Render();
+    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+#endif
 
     CRenderer::End();
 }

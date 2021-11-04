@@ -7,6 +7,10 @@
 #include "cube.h"
 #include "player.h"
 #include "stage.h"
+#include "audience.h"
+
+#include "audience_editor.h"
+#include "audience_manager.h"
 
 #define LAYER 3
 
@@ -20,12 +24,22 @@ public:
         //AddGameObject<CCube>(1);
         AddGameObject<CPlayer>(1);
 		AddGameObject<CStage>(1);
+		//AddGameObject<CAudience>(1);
         //AddGameObject<CHitRect>(1);
         AddGameObject<CPolygon>(2);
 
+        CAudienceManager::Create();
+        CAudienceManager::GetInstance()->Init();
+#if _DEBUG
+        CAudienceEditor::Create();
+#endif
     }
 
     void Uninit() {
+#if _DEBUG
+        CAudienceManager::GetInstance()->Save();
+#endif
+
         for (int i = 0; i < LAYER; i++) {
             for (auto object : m_GameObject[i]) {
                 object->Uninit();
@@ -33,6 +47,11 @@ public:
             }
             m_GameObject[i].clear();
         }
+
+#if _DEBUG
+        CAudienceEditor::Destroy();
+#endif
+        CAudienceManager::Destroy();
     }
 
     void Update() {
@@ -51,5 +70,7 @@ public:
                 object->Draw();
             }
         }
+
+        CAudienceEditor::GetInstance()->Draw();
     }
 };

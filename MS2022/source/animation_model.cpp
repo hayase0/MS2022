@@ -530,7 +530,7 @@ void CAnimationModel::BrendAnimation() {
 }
 
 void CAnimationModel::SetAnimation(const char* AnimationName) {
-    if (m_Animation[AnimationName]->HasAnimations() == false)
+    if (m_Animation[AnimationName] == nullptr)
         return;
 
     if (strcmp(m_NowAnimationName, "NONE") == 0) {
