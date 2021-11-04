@@ -22,6 +22,7 @@ private:
 //----------------
 	float m_OffsetRad = XM_PI;
 	float m_OffsetRaius = 20.0f;
+	float m_OffsetY = 0.0f;
 
 	static CCamera* m_Instance;      // インスタンス
 

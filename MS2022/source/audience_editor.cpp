@@ -46,7 +46,7 @@ void CAudienceEditor::Draw() {
     }
 
     ImGui::SliderInt("CurrentID", &m_CurrendId, 0, max(audiences.size() - 1, 0));
-    if (audiences.size() > m_CurrendId) {
+    if ((signed)audiences.size() > m_CurrendId) {
         float trans[3];
         trans[0] = audiences[m_CurrendId]->GetData().startpos.x;
         trans[1] = audiences[m_CurrendId]->GetData().startpos.y;
