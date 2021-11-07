@@ -167,6 +167,9 @@ void CCamera::Draw() {
     DirectX::XMStoreFloat4x4(&m_ViewMatrix, viewMatrix);
     //------------------------
 
+    XMMATRIX inv = XMMatrixInverse(nullptr, viewMatrix);
+    XMStoreFloat4x4(&m_InvViewMatrix, inv);
+
     CRenderer::SetViewMatrix(m_ViewMatrix);
 
     //CRenderer::SetViewMatrix(&m_ViewMatrix);

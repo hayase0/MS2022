@@ -16,6 +16,7 @@
 #include "renderer.h"
 #include "title.h"
 #include "input.h"
+#include "texttexture.h"
 
 
 CScene* CManager::m_Scene;
@@ -24,6 +25,7 @@ void CManager::Init(HINSTANCE hInstance, int nCmdShow) {
     CFrameRate::Initialize();
     CWindow::Initialize(hInstance);
     CRenderer::Init();
+    CTextTexture::Init();
     CWindow::Display(nCmdShow);
     CInput::Init();
 
@@ -31,10 +33,11 @@ void CManager::Init(HINSTANCE hInstance, int nCmdShow) {
     // ImGui‰Šú‰»
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
     ImGui::StyleColorsDark();
     ImGui_ImplWin32_Init(GetWindow());
     ImGui_ImplDX11_Init(CRenderer::GetDevice(), CRenderer::GetDeviceContext());
+    ImGuiIO& io = ImGui::GetIO();
+    io.Fonts->AddFontFromFileTTF("Assets/Fonts/meiryo.ttc", 20.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
 #endif
 
     SetScene<CTitle>();
@@ -60,6 +63,15 @@ void CManager::Uninit() {
 void CManager::Update() {
     CInput::Update();
 
+    if (CInput::GetKeyTrigger(VK_F1)) {
+        if (IsWindowVisible(GetEditWindow())) {
+            ShowWindow(GetEditWindow(), SW_HIDE);
+        }
+        else {
+            ShowWindow(GetEditWindow(), SW_SHOW);
+            UpdateWindow(GetEditWindow());
+        }
+    }
     m_Scene->Update();
 }
 

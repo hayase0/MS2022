@@ -102,11 +102,22 @@ void CAudienceEditor::Draw() {
             float pos[3] = { ac->GetGoal().x, ac->GetGoal().y,ac->GetGoal().z };
             if (ImGui::InputFloat3("Goal", pos))
                 audiences[m_CurrendId]->GetAction(m_ActionId)->SetGoal(XMFLOAT3(pos[0], pos[1], pos[2]));
+            
             char animid[20];
             std::strcpy(animid, ac->GetAnimId().c_str());
-            ImGui::InputText("AnimID", animid, 20);
-            audiences[m_CurrendId]->GetAction(m_ActionId)->SetAnimId(animid);
+            if (ImGui::InputText("AnimID", animid, 20))
+                audiences[m_CurrendId]->GetAction(m_ActionId)->SetAnimId(animid);
         }
+
+        ImGui::Separator();
+        char chat[100];
+        strcpy(chat, audiences[m_CurrendId]->GetData().chat.c_str());
+        if (ImGui::InputText("Chat", chat, IM_ARRAYSIZE(chat)))
+            audiences[m_CurrendId]->SetChat(chat);
+
+        int chatframe = audiences[m_CurrendId]->GetData().chatframe;
+        if (ImGui::InputInt("ChatFrame", &chatframe))
+            audiences[m_CurrendId]->SetChatFrame(chatframe);
     }
 
     if (ImGui::Button("Save"))

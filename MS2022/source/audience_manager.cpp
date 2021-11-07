@@ -106,7 +106,7 @@ void from_json(const json& j, CAction& p) {
 void to_json(json& j, const AUDIENCE& p) {
     j = json{ {"modelNo", p.modelno },{"StartPosX", p.startpos.x},
     {"StartPosY", p.startpos.y} ,{"StartPosZ", p.startpos.z},
-    { "ActionArray", p.action } };
+    { "ActionArray", p.action }, {"Chat", p.chat}, {"ChatFrame", p.chatframe}};
 }
 
 void from_json(const json& j, AUDIENCE& p) {
@@ -115,4 +115,6 @@ void from_json(const json& j, AUDIENCE& p) {
     j.at("StartPosY").get_to(p.startpos.y);
     j.at("StartPosZ").get_to(p.startpos.z);
     j.at("ActionArray").get_to(p.action);
+    j.at("Chat").get_to(p.chat);
+    j.at("ChatFrame").get_to(p.chatframe);
 }

@@ -31,4 +31,5 @@ public:
 };
 
 HWND GetWindow();
+HWND GetEditWindow();
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);

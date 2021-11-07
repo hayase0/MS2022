@@ -32,6 +32,8 @@ struct AUDIENCE {
     PLAYER_MODEL modelno;
     XMFLOAT3 startpos;
     std::vector<CAction> action;
+    std::string chat;
+    int chatframe;
 };
 
 

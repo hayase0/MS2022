@@ -15,6 +15,7 @@
 #include "manager.h"
 #include "scene.h"
 #include "camera.h"
+#include "bubble.h"
 
 #define SPEED 0.5f
 
@@ -32,6 +33,9 @@ void CAudience::Init() {
 	m_Position = XMFLOAT3(0.0f, -5.0f, 10.0f);
 	m_Rotation = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	m_Scale = XMFLOAT3(0.05f, 0.05f, 0.05f);
+
+	m_Data.chat = "";
+	m_Data.chatframe = 0;
 }
 
 void CAudience::Uninit() {
@@ -58,6 +62,14 @@ void CAudience::Update() {
 	}
 	SetPosition(pos);
 	SetRotation(rot);
+
+	m_ChatFrame++;
+	if (m_ChatFrame == m_Data.chatframe) {
+		m_ChatFrame = 0;
+		CBubble* bub = CManager::GetScene()->AddGameObject<CBubble>(1);
+		bub->SetParent(this);
+		bub->SetText(m_Data.chat.c_str());
+	}
 }
 
 void CAudience::Draw() {

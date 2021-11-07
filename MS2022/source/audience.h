@@ -27,6 +27,8 @@ private:
 	CAnimationModel* m_AnimModel = NULL;
 	CShader* m_Shader = NULL;
 
+	int m_ChatFrame = 0;
+
 public:
 
 	void Init();
@@ -62,4 +64,7 @@ public:
 	CAction* GetAction(int id) { return &m_Data.action[id]; }
 
 	int GetActionNum() { return m_Data.action.size(); }
+
+	void SetChat(std::string str) { m_Data.chat = str; }
+	void SetChatFrame(int n) { m_Data.chatframe = n; }
 };

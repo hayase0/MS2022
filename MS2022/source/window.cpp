@@ -14,9 +14,14 @@
 
 
 static HWND g_Window;
+static HWND g_EditWindow;
 
 HWND GetWindow() {
     return g_Window;
+}
+
+HWND GetEditWindow() {
+    return g_EditWindow;
 }
 
 #if _DEBUG
@@ -36,7 +41,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
             SendMessage(hWnd, WM_CLOSE, 0, 0);
         }
         break;
-
+    case WM_IME_CHAR:
+    {
+        auto& io = ImGui::GetIO();
+        DWORD wChar = wParam;
+        if (wChar <= 127) {
+            io.AddInputCharacter(wChar);
+        }
+        else {
+            // swap lower and upper part.
+            BYTE low = (BYTE)(wChar & 0x00FF);
+            BYTE high = (BYTE)((wChar & 0xFF00) >> 8);
+            wChar = MAKEWORD(high, low);
+            wchar_t ch[6];
+            MultiByteToWideChar(CP_OEMCP, 0, (LPCSTR)&wChar, 4, ch, 3);
+            io.AddInputCharacter(ch[0]);
+        }
+        return 0;
+    }
     case WM_CLOSE:
         if (MessageBox(hWnd, "終了してよろしいですか？", "終了確認", MB_OKCANCEL | MB_DEFBUTTON2) == IDOK) {
             DestroyWindow(hWnd);
@@ -70,7 +92,7 @@ void CWindow::Initialize(HINSTANCE hInstance) {
         NULL
     };
 
-    // ウィンドウクラスの登録
+    // 子ウィンドウクラスの登録
     RegisterClassEx(&wcex);
 
 
@@ -94,6 +116,20 @@ void CWindow::Initialize(HINSTANCE hInstance) {
         (SCREEN_WIDTH + GetSystemMetrics(SM_CXDLGFRAME) * 2),
         (SCREEN_HEIGHT + GetSystemMetrics(SM_CXDLGFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION)),
         NULL,
+        NULL,
+        hInstance,
+        NULL);
+
+    g_EditWindow = CreateWindowEx(
+        0,
+        "EDIT",
+        "",
+        WS_CHILD | WS_POPUP,
+        0,
+        800,
+        500,
+        20,
+        g_Window,
         NULL,
         hInstance,
         NULL);

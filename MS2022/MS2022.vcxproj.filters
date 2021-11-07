@@ -108,6 +108,12 @@
     <ClCompile Include="source\action.cpp">
       <Filter>gameobject</Filter>
     </ClCompile>
+    <ClCompile Include="source\texttexture.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="source\bubble.cpp">
+      <Filter>gameobject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\main.h">
@@ -210,6 +216,12 @@
       <Filter>debug</Filter>
     </ClInclude>
     <ClInclude Include="source\action.h">
+      <Filter>gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="source\texttexture.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="source\bubble.h">
       <Filter>gameobject</Filter>
     </ClInclude>
   </ItemGroup>

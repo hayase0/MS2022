@@ -8,6 +8,7 @@
 #include "player.h"
 #include "stage.h"
 #include "audience.h"
+#include "bubble.h"
 
 #include "audience_editor.h"
 #include "audience_manager.h"
@@ -23,9 +24,8 @@ public:
         AddGameObject<CCamera>(0);
         //AddGameObject<CCube>(1);
         AddGameObject<CPlayer>(1);
-		AddGameObject<CStage>(1);
-		//AddGameObject<CAudience>(1);
-        //AddGameObject<CHitRect>(1);
+        AddGameObject<CStage>(1);
+        //AddGameObject<CAudience>(1);
         AddGameObject<CPolygon>(2);
 
         CAudienceManager::Create();

@@ -2,10 +2,8 @@
 #include "main.h"
 #include "window.h"
 #include "renderer.h"
-
 #include "game_object.h"
 #include "polygon.h"
-
 
 
 void CPolygon::Init()
@@ -98,7 +96,6 @@ void CPolygon::Draw()
 	//m_Shader->SetPrameter( m_Blend );
 
 	m_Shader->Set();
-
 
 	// テクスチャ設定
 	CRenderer::SetTexture( m_TextureWic, 0 );

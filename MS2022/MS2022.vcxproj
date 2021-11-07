@@ -161,6 +161,7 @@
     <ClCompile Include="source\animation_model.cpp" />
     <ClCompile Include="source\audience.cpp" />
     <ClCompile Include="source\audience_manager.cpp" />
+    <ClCompile Include="source\bubble.cpp" />
     <ClCompile Include="source\camera.cpp" />
     <ClCompile Include="source\cube.cpp" />
     <ClCompile Include="source\frame_rate.cpp" />
@@ -178,6 +179,7 @@
     <ClCompile Include="source\texture_wic.cpp" />
     <ClCompile Include="source\WICTextureLoader11.cpp" />
     <ClCompile Include="source\window.cpp" />
+    <ClCompile Include="source\texttexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\imgui\imconfig.h" />
@@ -192,6 +194,7 @@
     <ClInclude Include="source\animation_model.h" />
     <ClInclude Include="source\audience.h" />
     <ClInclude Include="source\audience_manager.h" />
+    <ClInclude Include="source\bubble.h" />
     <ClInclude Include="source\camera.h" />
     <ClInclude Include="source\cube.h" />
     <ClInclude Include="source\frame_rate.h" />
@@ -209,6 +212,7 @@
     <ClInclude Include="source\scene.h" />
     <ClInclude Include="source\shader.h" />
     <ClInclude Include="source\stage.h" />
+    <ClInclude Include="source\texttexture.h" />
     <ClInclude Include="source\texture.h" />
     <ClInclude Include="source\texture_wic.h" />
     <ClInclude Include="source\title.h" />
