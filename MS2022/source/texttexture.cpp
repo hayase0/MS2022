@@ -61,7 +61,7 @@ void CTextTexture::MakeTexture(ID3D11Texture2D* &texture,
     ID3D11ShaderResourceView* &srv, ID2D1Bitmap1* &d2dTargetBitmap) {
     int width, height;
     width = 500;
-    height = 100;
+    height = 70;
 
     D3D11_TEXTURE2D_DESC td;
     ZeroMemory(&td, sizeof(td));

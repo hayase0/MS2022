@@ -62,7 +62,7 @@ void CBubble::Init() {
 
 	m_Position = XMFLOAT3(0, 0, 0);
 	m_Rotation = XMFLOAT3(0, 0, 0);
-	m_Scale = XMFLOAT3(5, 2, 2);
+	m_Scale = XMFLOAT3(5, 3, 2);
 }
 
 
