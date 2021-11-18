@@ -13,6 +13,8 @@
 #include "audience_editor.h"
 #include "audience_manager.h"
 
+#include "chat_manager.h"
+
 #define LAYER 3
 
 class CTitle : public CScene {
@@ -30,6 +32,8 @@ public:
 
         CAudienceManager::Create();
         CAudienceManager::GetInstance()->Init();
+
+        CChatManager::Create();
 #if _DEBUG
         CAudienceEditor::Create();
 #endif
@@ -62,6 +66,8 @@ public:
 
             m_GameObject[i].remove_if([](auto object) { return object->Destroy(); });
         }
+
+        CChatManager::GetInstance()->Update();
     }
 
     void Draw() {

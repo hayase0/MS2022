@@ -68,7 +68,10 @@ void CAudience::Update() {
 		m_ChatFrame = 0;
 		CBubble* bub = CManager::GetScene()->AddGameObject<CBubble>(1);
 		bub->SetParent(this);
-		bub->SetText(m_Data.chat.c_str());
+
+		wchar_t wc[100];
+		MultiByteToWideChar(CP_UTF8, 0U, m_Data.chat.c_str(), -1, wc, strlen(m_Data.chat.c_str()));
+		bub->SetText(wc);
 	}
 }
 

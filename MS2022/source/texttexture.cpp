@@ -106,7 +106,7 @@ void CTextTexture::MakeTexture(ID3D11Texture2D* &texture,
     }   
 }
 
-void CTextTexture::Draw2D(ID2D1Bitmap1* d2dTargetBitmap, const char* text) {
+void CTextTexture::Draw2D(ID2D1Bitmap1* d2dTargetBitmap, const wchar_t* text) {
     // テクスチャ書き込み
     m_D2DContext->BeginDraw();
     m_D2DContext->Clear(D2D1::ColorF(D2D1::ColorF::White));
@@ -120,7 +120,7 @@ void CTextTexture::Draw2D(ID2D1Bitmap1* d2dTargetBitmap, const char* text) {
             , DWRITE_FONT_WEIGHT_NORMAL
             , DWRITE_FONT_STYLE_NORMAL
             , DWRITE_FONT_STRETCH_NORMAL
-            , 80
+            , 50
             , L""
             , &pTextFormat
         );
@@ -134,10 +134,10 @@ void CTextTexture::Draw2D(ID2D1Bitmap1* d2dTargetBitmap, const char* text) {
     }
 
     
-    wchar_t wc[100];
-    MultiByteToWideChar(CP_UTF8, 0U, text, -1, wc, strlen(text));
-    size_t len = wcslen(wc);
-    m_D2DContext->DrawTextA(wc, len,
+   /* wchar_t wc[100];
+    MultiByteToWideChar(CP_UTF8, 0U, text, -1, wc, strlen(text));*/
+    size_t len = wcslen(text);
+    m_D2DContext->DrawTextA(text, len,
         pTextFormat, &D2D1::RectF(0, 0, 1000, 100), pBrush);
 
     m_D2DContext->EndDraw();

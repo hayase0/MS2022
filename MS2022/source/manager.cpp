@@ -61,17 +61,7 @@ void CManager::Uninit() {
 }
 
 void CManager::Update() {
-    CInput::Update();
-
-    if (CInput::GetKeyTrigger(VK_F1)) {
-        if (IsWindowVisible(GetEditWindow())) {
-            ShowWindow(GetEditWindow(), SW_HIDE);
-        }
-        else {
-            ShowWindow(GetEditWindow(), SW_SHOW);
-            UpdateWindow(GetEditWindow());
-        }
-    }
+    CInput::Update();   
     m_Scene->Update();
 }
 

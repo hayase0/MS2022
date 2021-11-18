@@ -92,7 +92,7 @@ void CWindow::Initialize(HINSTANCE hInstance) {
         NULL
     };
 
-    // 子ウィンドウクラスの登録
+    // ウィンドウクラスの登録
     RegisterClassEx(&wcex);
 
 

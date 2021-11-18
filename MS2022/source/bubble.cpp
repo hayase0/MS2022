@@ -128,6 +128,7 @@ void CBubble::Draw() {
 
 	m_Shader->Set();
 
+
 	CTextTexture::Draw2D(m_TargetBitMap, m_Text.c_str());
 	// テクスチャ設定
 	//CRenderer::SetTexture( m_TextureWic, 0 );

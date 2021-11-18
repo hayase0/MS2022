@@ -163,6 +163,7 @@
     <ClCompile Include="source\audience_manager.cpp" />
     <ClCompile Include="source\bubble.cpp" />
     <ClCompile Include="source\camera.cpp" />
+    <ClCompile Include="source\chat_manager.cpp" />
     <ClCompile Include="source\cube.cpp" />
     <ClCompile Include="source\frame_rate.cpp" />
     <ClCompile Include="source\input.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="source\audience_manager.h" />
     <ClInclude Include="source\bubble.h" />
     <ClInclude Include="source\camera.h" />
+    <ClInclude Include="source\chat_manager.h" />
     <ClInclude Include="source\cube.h" />
     <ClInclude Include="source\frame_rate.h" />
     <ClInclude Include="source\game.h" />

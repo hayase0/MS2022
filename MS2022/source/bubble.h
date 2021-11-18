@@ -17,7 +17,7 @@
 // ポリゴンクラス（ゲームオブジェクト）
 class CBubble : public CGameObject {
 private:
-	std::string m_Text;
+	std::wstring m_Text;
 	CGameObject* m_Parent;
 
 	ID3D11Buffer* m_VertexBuffer = NULL; // 頂点バッファ
@@ -37,5 +37,5 @@ public:
 
 	void SetParent(CGameObject* p) { m_Parent = p; }
 	void SetVertex(XMFLOAT3 pos, XMFLOAT3 size, XMFLOAT2 uv = XMFLOAT2(0, 0), XMFLOAT2 uvsize = XMFLOAT2(1.0, 1.0));
-	void SetText(const char* text) { m_Text = text; }
+	void SetText(const wchar_t* text) { m_Text = text; }
 };

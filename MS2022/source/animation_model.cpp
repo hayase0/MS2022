@@ -42,7 +42,7 @@ void CAnimationModel::Update() {
                 bone->AnimationMatrix = aiMatrix4x4(aiVector3D(1.0f, 1.0f, 1.0f), rot, pos);
             }
         }
-        m_Frame1+= 1.0f;
+        m_Frame1 += 1.0f;
 
         //再帰的にボーンマトリクスを更新
         UpdateBoneMatrix(m_Scene->mRootNode, aiMatrix4x4());
@@ -197,7 +197,7 @@ void CAnimationModel::Update() {
     //        vertex[v].Normal.x = deformVertex->Normal.x;
     //        vertex[v].Normal.y = deformVertex->Normal.y;
     //        vertex[v].Normal.z = deformVertex->Normal.z;
-    //        
+    //
     //        vertex[v].TexCoord.x = mesh->mTextureCoords[0][v].x;
     //        vertex[v].TexCoord.y = mesh->mTextureCoords[0][v].y;
 
@@ -228,14 +228,15 @@ void CAnimationModel::Draw() {
         //テクスチャ設定
         aiString path;
         material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
-        CRenderer::SetTexture(m_Texture[path.data], 0);
+        if (m_Texture[path.data] != NULL)
+            CRenderer::SetTexture(m_Texture[path.data], 0);
         //CRenderer::GetDeviceContext()->PSSetShaderResources(0, 1, m_Texture[path.data]);
 
         //頂点バッファ設定
         UINT stride = sizeof(VERTEX_3D_ANIMATION);
         UINT offset = 0;
         CRenderer::GetDeviceContext()->IASetVertexBuffers(0, 1,
-                                                          &m_VertexBuffer[m], &stride, &offset);
+            &m_VertexBuffer[m], &stride, &offset);
 
         // インデックスバッファ設定
         CRenderer::GetDeviceContext()->IASetIndexBuffer(m_IndexBuffer[m], DXGI_FORMAT_R32_UINT, 0);
@@ -245,15 +246,15 @@ void CAnimationModel::Draw() {
     }
 }
 
-void CAnimationModel::Load(const char *FileName) {
+void CAnimationModel::Load(const char* FileName) {
     const std::string modelPath(FileName);
 
     m_Scene = aiImportFile(FileName,
-                           aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_ConvertToLeftHanded);
+        aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_ConvertToLeftHanded);
     assert(m_Scene);
 
-    m_VertexBuffer = new ID3D11Buffer*[m_Scene->mNumMeshes];
-    m_IndexBuffer = new ID3D11Buffer*[m_Scene->mNumMeshes];
+    m_VertexBuffer = new ID3D11Buffer * [m_Scene->mNumMeshes];
+    m_IndexBuffer = new ID3D11Buffer * [m_Scene->mNumMeshes];
 
     //変形後頂点配列生成
     //m_DeformVertex = new std::vector<DEFORM_VERTEX>[m_Scene->mNumMeshes];
@@ -399,7 +400,7 @@ void CAnimationModel::Load(const char *FileName) {
                         CTextureWIC* texture;
                         texture = new CTextureWIC;
                         int id = atoi(&path.data[1]);
-                        
+
                         /*D3DX11CreateShaderResourceViewFromMemory(
                             CRenderer::GetDevice(),
                             (const unsigned char*)m_Scene->mTextures[id]->pcData,
@@ -409,7 +410,7 @@ void CAnimationModel::Load(const char *FileName) {
                             &texture,
                             NULL);*/
 
-                        //m_Texture[path.data] = texture;
+                            //m_Texture[path.data] = texture;
                         texture->Load((const unsigned char*)m_Scene->mTextures[id]->pcData,
                             m_Scene->mTextures[id]->mWidth);
 
@@ -417,13 +418,24 @@ void CAnimationModel::Load(const char *FileName) {
                     }
                 }
                 else {
-                     //外部ファイルから読み込み
+                    //外部ファイルから読み込み
+                    CTextureWIC* texture;
+                    texture = new CTextureWIC;
+                    int id = atoi(&path.data[1]);
+
+                    size_t len = strlen(path.C_Str());
+                    wchar_t* wc = new wchar_t[len + 1];
+                    mbstowcs(wc, path.C_Str(), len + 1);
+                    texture->Load(wc);
+                    delete[] wc;
+
+                    m_Texture[path.data] = texture;
                 }
             }
             else {
                 m_Texture[path.data] = NULL;
             }
-            
+
         }
     }
 }
@@ -445,11 +457,11 @@ void CAnimationModel::Unload() {
 
     aiReleaseImport(m_Scene);
 
-    for(auto pair : m_Animation)
+    for (auto pair : m_Animation)
         aiReleaseImport(pair.second);
 }
 
-void CAnimationModel::LoadAnimation(const char *FileName, const char *Name) {
+void CAnimationModel::LoadAnimation(const char* FileName, const char* Name) {
     m_Animation[Name] = aiImportFile(FileName, aiProcess_ConvertToLeftHanded);
     assert(m_Animation[Name]);
 }
@@ -510,12 +522,12 @@ void CAnimationModel::BrendAnimation() {
         rot.y += (rot2.y - rot.y) * cosf(m_Per);
         rot.z += (rot2.z - rot.z) * cosf(m_Per);
         rot.w += (rot2.w - rot.w) * cosf(m_Per);*/
-        
+
         pos += (pos2 - pos) * m_Per;
 
         bone->AnimationMatrix = aiMatrix4x4(aiVector3D(1.0f, 1.0f, 1.0f), rot, pos);
     }
-    
+
     if (m_Per >= 1) {
         m_Frame1 = m_Frame2;
         m_Frame2 = 0;
@@ -536,7 +548,7 @@ void CAnimationModel::SetAnimation(const char* AnimationName) {
     if (strcmp(m_NowAnimationName, "NONE") == 0) {
         strcpy(m_NowAnimationName, AnimationName);
     }
-    else if (strcmp(m_NextAnimationName, "NONE") == 0){
+    else if (strcmp(m_NextAnimationName, "NONE") == 0) {
         if (strcmp(m_NowAnimationName, AnimationName) != 0) {
             strcpy(m_NextAnimationName, AnimationName);
         }

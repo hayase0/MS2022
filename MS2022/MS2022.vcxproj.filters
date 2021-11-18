@@ -22,6 +22,9 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{0882b2fc-986a-4751-bffe-30c0606c4d39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="manager">
+      <UniqueIdentifier>{b08acdd9-9b0a-40b8-a4d2-baa3c87d2000}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -102,9 +105,6 @@
     <ClCompile Include="include\imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="source\audience_manager.cpp">
-      <Filter>debug</Filter>
-    </ClCompile>
     <ClCompile Include="source\action.cpp">
       <Filter>gameobject</Filter>
     </ClCompile>
@@ -113,6 +113,12 @@
     </ClCompile>
     <ClCompile Include="source\bubble.cpp">
       <Filter>gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="source\chat_manager.cpp">
+      <Filter>manager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audience_manager.cpp">
+      <Filter>manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +218,6 @@
     <ClInclude Include="include\imgui\imstb_truetype.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="source\audience_manager.h">
-      <Filter>debug</Filter>
-    </ClInclude>
     <ClInclude Include="source\action.h">
       <Filter>gameobject</Filter>
     </ClInclude>
@@ -223,6 +226,12 @@
     </ClInclude>
     <ClInclude Include="source\bubble.h">
       <Filter>gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="source\chat_manager.h">
+      <Filter>manager</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audience_manager.h">
+      <Filter>manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

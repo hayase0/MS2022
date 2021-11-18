@@ -29,5 +29,5 @@ public:
     static void Init();
     static void MakeTexture(ID3D11Texture2D* &texture,
         ID3D11ShaderResourceView* &srv, ID2D1Bitmap1*& d2dTargetBitmap);
-    static void Draw2D(ID2D1Bitmap1* d2dTargetBitmap, const char* text);
+    static void Draw2D(ID2D1Bitmap1* d2dTargetBitmap, const wchar_t* text);
 };
