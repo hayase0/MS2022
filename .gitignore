@@ -62,8 +62,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-misoten/Library/PackageCache/com.unity.timeline@1.4.6/
-misoten/Temp/
-misoten/Logs/
-misoten/Library/
-misoten/obj/Debug/
+unity/misoten/Library/PackageCache/com.unity.timeline@1.4.6/
+unity/misoten/Temp/
+unity/misoten/Logs/
+unity/misoten/Library/
+unity/misoten/obj/Debug/
