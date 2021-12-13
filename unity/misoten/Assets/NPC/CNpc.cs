@@ -34,9 +34,8 @@ public class CNpc : MonoBehaviour
 	void Update() {
 		if (state == NPC_STATE.WALK) {
 			//　目的地に到着したかどうかの判定
-			if (navMeshAgent.remainingDistance < 0.5f) {
+			if (navMeshAgent.remainingDistance < 0.1f) {
 				state = NPC_STATE.WAIT;
-				animator.SetBool("isWalk", false);
 			}
 		}
 		else if (state == NPC_STATE.WAIT) {
@@ -48,6 +47,15 @@ public class CNpc : MonoBehaviour
 				waittime = Random.Range(5, 10);
 				counter = 0;
 			}
+		}
+
+		if(navMeshAgent.velocity.magnitude > 0.1f) {
+			animator.SetBool("isWalk", true);
+
+		}
+        else {
+			animator.SetBool("isWalk", false);
+
 		}
 	}
 
@@ -66,7 +74,7 @@ public class CNpc : MonoBehaviour
 	}
 
 	void SetDestination() {
-		Vector3 randomPos = new Vector3(Random.Range(-wanderRange, wanderRange), 0, Random.Range(-wanderRange, wanderRange));
+		Vector3 randomPos = new Vector3(Random.Range(-wanderRange, wanderRange), Random.Range(0, 9), Random.Range(-wanderRange, wanderRange));
 		//Debug.Log(randomPos);
 		//SamplePositionは設定した場所から5の範囲で最も近い距離のBakeされた場所を探す。
 		NavMesh.SamplePosition(randomPos, out navMeshHit, 5, 1);
@@ -74,6 +82,5 @@ public class CNpc : MonoBehaviour
 		RandomWander();
 
 		state = NPC_STATE.WALK;
-		animator.SetBool("isWalk", true);
 	}
 }
