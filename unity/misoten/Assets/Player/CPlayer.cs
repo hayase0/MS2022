@@ -39,5 +39,12 @@ public class CPlayer : MonoBehaviour {
         else {
             animator.SetBool("walk", false);
         }
+
+        if(curSpeed < -0.1f) {
+            animator.SetBool("back", true);
+        }
+        else {
+            animator.SetBool("back", false);
+        }
     }
 }
