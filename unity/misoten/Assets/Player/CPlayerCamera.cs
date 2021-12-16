@@ -27,8 +27,16 @@ public class CPlayerCamera : MonoBehaviour {
 			Screen.lockCursor = true;
 		}
 
-		if (Input.GetKeyDown("escape")) {
+		if (Input.GetKeyDown("1")) {
 			Screen.lockCursor = false;
+		}
+
+		if (Input.GetKeyDown("q")) {
+			centerOffset.y += 0.1f;
+		}
+
+		if (Input.GetKeyDown("e")) {
+			centerOffset.y -= 0.1f;
 		}
 
 		if (Input.GetAxis("Mouse ScrollWheel") != 0) {
