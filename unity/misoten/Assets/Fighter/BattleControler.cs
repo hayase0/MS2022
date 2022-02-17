@@ -53,8 +53,8 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
 
                 if (play == false) {
                     // スポーンエフェクト再生
-                    Instantiate(effect, new Vector3(0.8f, 2.0f, 0.0f), Quaternion.identity);
-                    Instantiate(effect, new Vector3(-0.8f, 2.0f, 0.0f), Quaternion.identity);
+                    Instantiate(effect, new Vector3(0.8f, 3.0f, 0.0f), Quaternion.identity);
+                    Instantiate(effect, new Vector3(-0.8f, 3.0f, 0.0f), Quaternion.identity);
                     play = true;
                 }
 
@@ -209,7 +209,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
     public void CreateorDestroy() {
         if (fighter1 == null && fighter2 == null) {
             // ファイター二体を生成
-            fighter1 = Instantiate(prb_fighter1, new Vector3(0.8f, 1.0f, 0.0f), Quaternion.Euler(0.0f, -90.0f, 0.0f));
+            fighter1 = Instantiate(prb_fighter1, new Vector3(0.8f, 2.0f, 0.0f), Quaternion.Euler(0.0f, -90.0f, 0.0f));
             // アニメーター取得
             animator1 = fighter1.GetComponent<Animator>();
             // 待機モーションtrue
@@ -219,7 +219,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
 
         }
         else if(fighter2 == null) {
-            fighter2 = Instantiate(prb_fighter2, new Vector3(-0.8f, 1.0f, 0.0f), Quaternion.Euler(0.0f, 90.0f, 0.0f));
+            fighter2 = Instantiate(prb_fighter2, new Vector3(-0.8f, 2.0f, 0.0f), Quaternion.Euler(0.0f, 90.0f, 0.0f));
             animator2 = fighter2.GetComponent<Animator>();
             animator2.SetBool("Wait", true);
         }
