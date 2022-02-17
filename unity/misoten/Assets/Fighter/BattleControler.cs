@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class BattleControler : SingletonMonoBehaviour<BattleControler> {
     [SerializeField] GameObject prb_fighter1, prb_fighter2;    // ファイタープレハブ
@@ -20,6 +22,13 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
     // UIManager
     UIController cs_uictrl;
     Timer cs_timer;
+
+    // ゲージ用
+    [SerializeField] private Image[] Fighter1greenGauge;
+    [SerializeField] private Image[] Fighter2greenGauge;
+
+    [SerializeField] private Color[] color = new Color[4];
+    private int gaugeNum = 4;
 
     // バトルフローステート
     enum BATTLESTATE {
@@ -123,9 +132,15 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
 
                 // 死亡する方のHPを0に
                 if (animator1.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Two Handed Sword Death") {
+                    // ゲージ用
+                    GaugeReducationFighter1(maxhp);
+
                     hp1 = 0;
                 }
                 if (animator2.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Two Handed Sword Death") {
+                    // ゲージ用
+                    GaugeReducationFighter2(maxhp);
+
                     hp2 = 0;
                 }
 
@@ -133,6 +148,10 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                 if (animator1.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Boxing") {
                     if (!damage) {
                         damage = true;
+
+                        // ゲージ用
+                        GaugeReducationFighter1(10f);
+
                         hp1 -= 10;
                     }
 
@@ -148,6 +167,10 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                 else if (animator2.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Boxing") {
                     if (!damage) {
                         damage = true;
+
+                        // ゲージ用
+                        GaugeReducationFighter2(10f);
+
                         hp2 -= 10;
                     }
 
@@ -255,6 +278,40 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
         }
         else {
             return true;
+        }
+    }
+
+    // ゲージ用
+    public void GaugeReducationFighter1(float reducationValue, float time = 0.8f) {
+
+        var valueTo = (hp1 - reducationValue) / maxhp;
+
+        for (int i = 0; i < gaugeNum; i++) {
+            if (valueTo > 0.75f)
+                Fighter1greenGauge[i].color = Color.Lerp(color[1], color[0], (valueTo - 0.75f) * 4f);
+            else if (valueTo > 0.25f)
+                Fighter1greenGauge[i].color = Color.Lerp(color[2], color[1], (valueTo - 0.25f) * 4f);
+            else
+                Fighter1greenGauge[i].color = Color.Lerp(color[3], color[2], valueTo * 4f);
+
+            Fighter1greenGauge[i].fillAmount = valueTo;
+        }
+    }
+
+    public void GaugeReducationFighter2(float reducationValue, float time = 0.8f) {
+
+        var valueTo = (hp2 - reducationValue) / maxhp;
+
+
+        for (int i = 0; i < gaugeNum; i++) {
+            if (valueTo > 0.75f)
+                Fighter2greenGauge[i].color = Color.Lerp(color[1], color[0], (valueTo - 0.75f) * 4f);
+            else if (valueTo > 0.25f)
+                Fighter2greenGauge[i].color = Color.Lerp(color[2], color[1], (valueTo - 0.25f) * 4f);
+            else
+                Fighter2greenGauge[i].color = Color.Lerp(color[3], color[2], valueTo * 4f);
+
+            Fighter2greenGauge[i].fillAmount = valueTo;
         }
     }
 }
