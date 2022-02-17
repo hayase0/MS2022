@@ -17,6 +17,10 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
     int ratio = 50;
 
 
+    // UIManager
+    UIController cs_uictrl;
+    Timer cs_timer;
+
     // バトルフローステート
     enum BATTLESTATE {
         INTERVAL,
@@ -28,21 +32,27 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
     BATTLESTATE state;
 
     // Start is called before the first frame update
-    void Start() {       
+    void Start() {
         state = BATTLESTATE.INTERVAL;
         fighter1 = null;
         fighter2 = null;
+
+        // UIManager取得
+        GameObject uim = GameObject.Find("UIManager");
+        cs_uictrl = uim.GetComponent<UIController>();
+        GameObject uitimer = cs_uictrl.GetTimer();
+        cs_timer = uitimer.transform.Find("Timer").gameObject.GetComponent<Timer>();
     }
 
     // Update is called once per frame
     void Update() {
         switch (state) {
             // 投票時間-----------------------------------------------------------
-            case BATTLESTATE.INTERVAL: 
-                timer += Time.deltaTime;
+            case BATTLESTATE.INTERVAL:
+                //timer += Time.deltaTime;
 
                 // interval経過後キャラ生成
-                if(timer >= interval) {
+                if (cs_timer.GetTime() <= 10.0f) {
                     state = BATTLESTATE.SPAWN;
                     timer = 0;
                 }
@@ -68,10 +78,13 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
             case BATTLESTATE.WAIT:
 
                 // ファイトステートに移行
-                if (Input.GetKey(KeyCode.R)) {
+                if (cs_timer.GetTime() <= 0.0f) {
                     animator1.SetBool("Wait", false);
                     animator2.SetBool("Wait", false);
                     state = BATTLESTATE.FIGHT;
+
+                    // UI非表示
+                    cs_uictrl.SetUIActive(false);
                 }
                 break;
             // ファイター戦闘-----------------------------------------------------
@@ -109,7 +122,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                 }
 
                 // 死亡する方のHPを0に
-                if(animator1.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Two Handed Sword Death") {
+                if (animator1.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Two Handed Sword Death") {
                     hp1 = 0;
                 }
                 if (animator2.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Two Handed Sword Death") {
@@ -162,7 +175,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                 }
 
                 // どちらかのHPが0になったら試合終了
-                if(hp1 == 0 || hp2 == 0) {
+                if (hp1 == 0 || hp2 == 0) {
                     timer += Time.deltaTime;
 
                     if (timer >= 5) {
@@ -193,16 +206,18 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                     play = true;
                 }
 
-                if(fighter2 == null) {
-                    // ファイトステートに移行
-                    if (Input.GetKey(KeyCode.R)) {                       
-                        state = BATTLESTATE.INTERVAL;
-                        play = false;
-                    }
+                if (fighter2 == null) {
+                    state = BATTLESTATE.INTERVAL;
+                    play = false;
+
+                    // タイマーリセット
+                    cs_timer.ResetTime();
+                    // UI非表示
+                    cs_uictrl.SetUIActive(true);                   
                 }
                 break;
 
-        }       
+        }
     }
 
     // プレイヤー生成＆削除
@@ -218,18 +233,28 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
             hp1 = hp2 = maxhp;
 
         }
-        else if(fighter2 == null) {
+        else if (fighter2 == null) {
             fighter2 = Instantiate(prb_fighter2, new Vector3(-0.8f, 2.0f, 0.0f), Quaternion.Euler(0.0f, 90.0f, 0.0f));
             animator2 = fighter2.GetComponent<Animator>();
             animator2.SetBool("Wait", true);
         }
-        else if (fighter1 != null){
+        else if (fighter1 != null) {
             Destroy(fighter1);
             fighter1 = null;
         }
         else {
             Destroy(fighter2);
             fighter2 = null;
+        }
+    }
+
+    // 勝敗を取得
+    public bool GetRedWin() {
+        if (hp1 <= 0) {
+            return false;
+        }
+        else {
+            return true;
         }
     }
 }

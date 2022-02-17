@@ -12,17 +12,28 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject prefabCursorManager;
     [SerializeField] private GameObject prefabDateTimeManager;
 
+    // インスタンス
+    private GameObject UITimer;
+    private GameObject UIVote;
+    private GameObject UICursor;
+    
+
     //Canvasのrender cameraに設定するカメラ
     [SerializeField] private Camera targetCamera;
 
     void Start()
     {
         //UIに必要なプレハブを生成
-        Instantiate(prefabCanvasOdds, Vector3.zero, Quaternion.identity);
+        GameObject CanvasOdds = Instantiate(prefabCanvasOdds, Vector3.zero, Quaternion.identity);
         Instantiate(prefabCanvasUI, Vector3.zero, Quaternion.identity);
         Instantiate(prefabOddsGaugeManager, Vector3.zero, Quaternion.identity);
         Instantiate(prefabCursorManager, Vector3.zero, Quaternion.identity);
         Instantiate(prefabDateTimeManager, Vector3.zero, Quaternion.identity);
+
+        // キャンバスのタイマーと投票部分
+        UITimer = CanvasOdds.transform.Find("BackGround01").gameObject;
+        UIVote = CanvasOdds.transform.Find("BackGround02").gameObject;
+        UICursor = CanvasOdds.transform.Find("SelectCursor").gameObject;
 
         //renderModeにカメラをアタッチする
         targetCamera = GameObject.Find("Player/Camera (1)").GetComponent<Camera>();
@@ -33,5 +44,17 @@ public class UIController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    // UIの表示/非表示
+    public void SetUIActive(bool b) {
+        UITimer.SetActive(b);
+        UIVote.SetActive(b);
+        UICursor.SetActive(b);
+    }
+
+    // TimerGetter
+    public GameObject GetTimer() {
+        return UITimer;
     }
 }

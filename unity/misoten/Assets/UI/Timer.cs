@@ -27,4 +27,14 @@ public class Timer : MonoBehaviour
             CountDownTime = 0.0F;
         }
     }
+
+    // ŽžŠÔŽæ“¾
+    public float GetTime() {
+        return CountDownTime;
+    }
+
+    // ŽžŠÔƒŠƒZƒbƒg
+    public void ResetTime() {
+        CountDownTime = 30.0f;
+    }
 }
