@@ -7,16 +7,19 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
     [SerializeField] GameObject effect;                // スポーンエフェクト
     [SerializeField] int hp1, hp2;                     // ファイターのHP
     [SerializeField] int maxhp = 100;                  // ファイターの最大HP
+    [SerializeField] int interval = 10;                // インターバル時間
 
-    GameObject fighter1, fighter2;                      // ファイターオブジェクト
+    GameObject fighter1, fighter2;                     // ファイターオブジェクト
     Animator animator1, animator2;                     // ファイターのアニメーター
     bool move, damage;                                 // ファイターの行動フラグ
-    bool play = false;
+    bool play = false;                                 // エフェクト再生フラグ
     float timer = 0;                                   // タイマー
+    int ratio = 50;
 
 
     // バトルフローステート
     enum BATTLESTATE {
+        INTERVAL,
         SPAWN,
         WAIT,
         FIGHT,
@@ -26,7 +29,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
 
     // Start is called before the first frame update
     void Start() {       
-        state = BATTLESTATE.SPAWN;
+        state = BATTLESTATE.INTERVAL;
         fighter1 = null;
         fighter2 = null;
     }
@@ -34,6 +37,17 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
     // Update is called once per frame
     void Update() {
         switch (state) {
+            // 投票時間-----------------------------------------------------------
+            case BATTLESTATE.INTERVAL: 
+                timer += Time.deltaTime;
+
+                // interval経過後キャラ生成
+                if(timer >= interval) {
+                    state = BATTLESTATE.SPAWN;
+                    timer = 0;
+                }
+                break;
+            // ファイター生成-----------------------------------------------------
             case BATTLESTATE.SPAWN:
                 move = false;
 
@@ -50,6 +64,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                     play = false;
                 }
                 break;
+            // 待機---------------------------------------------------------------
             case BATTLESTATE.WAIT:
 
                 // ファイトステートに移行
@@ -59,6 +74,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                     state = BATTLESTATE.FIGHT;
                 }
                 break;
+            // ファイター戦闘-----------------------------------------------------
             case BATTLESTATE.FIGHT:
                 if (animator1.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Fist Fight B") {
 
@@ -66,9 +82,9 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                         animator1.SetBool("Fight", false);
                         animator2.SetBool("Fight", false);
 
+                        // ダメージを受ける方を乱数で決める
                         int rand = Random.Range(1, 100);
-                        Debug.Log(rand);
-                        if (rand < 50) {
+                        if (rand < ratio) {
                             animator1.SetBool("Boxing", false);
                             animator2.SetBool("Boxing", true);
                             animator1.SetBool("Wait", true);
@@ -92,6 +108,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                     damage = false;
                 }
 
+                // 死亡する方のHPを0に
                 if(animator1.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Two Handed Sword Death") {
                     hp1 = 0;
                 }
@@ -99,6 +116,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                     hp2 = 0;
                 }
 
+                // ダメージモーション再生
                 if (animator1.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Boxing") {
                     if (!damage) {
                         damage = true;
@@ -131,11 +149,11 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                 }
 
 
+                // 互いに近づいて戦闘モーションを再生
                 if (move) {
                     Vector3 vec = fighter1.transform.position - fighter2.transform.position;
                     fighter2.transform.position += vec.normalized * 0.02f;
                     fighter1.transform.position -= vec.normalized * 0.02f;
-                    Debug.Log(vec.magnitude);
                     if (vec.magnitude <= 1.55f) {
                         animator1.SetBool("Fight", true);
                         animator2.SetBool("Fight", true);
@@ -143,6 +161,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                     }
                 }
 
+                // どちらかのHPが0になったら試合終了
                 if(hp1 == 0 || hp2 == 0) {
                     timer += Time.deltaTime;
 
@@ -152,6 +171,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                     }
                 }
                 break;
+            // 試合終了-----------------------------------------------------------
             case BATTLESTATE.END:
                 if (play == false) {
                     Vector3 pos1, pos2;
@@ -176,7 +196,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                 if(fighter2 == null) {
                     // ファイトステートに移行
                     if (Input.GetKey(KeyCode.R)) {                       
-                        state = BATTLESTATE.SPAWN;
+                        state = BATTLESTATE.INTERVAL;
                         play = false;
                     }
                 }
@@ -185,6 +205,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
         }       
     }
 
+    // プレイヤー生成＆削除
     public void CreateorDestroy() {
         if (fighter1 == null && fighter2 == null) {
             // ファイター二体を生成
