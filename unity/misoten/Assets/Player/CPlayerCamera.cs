@@ -8,11 +8,17 @@ public class CPlayerCamera : MonoBehaviour {
 	public float mouseSensitivity = 30.0f;  // マウス感度
 	public Vector3 centerOffset = new Vector3(0, 0, 0); // カメラが見るオブジェクト位置のオフセット
 
-	private float distance = 3.0f;  // カメラとオブジェクトまでの距離
-	private float angleY = 0.0f;    // カメラのY軸成分
-	private float angleX = 0.0f;    // カメラのX軸成分
 
-	[System.Obsolete]
+	[SerializeField] private float distance = 3.0f;  // カメラとオブジェクトまでの距離
+	[SerializeField] private float angleY = 0.0f;    // カメラのY軸成分
+	[SerializeField] private float angleX = 0.0f;    // カメラのX軸成分
+
+
+    private void Start() {
+		camera_reset();
+	}
+
+    [System.Obsolete]
 	void Awake() {
 		Screen.lockCursor = true;
 	}
@@ -53,5 +59,13 @@ public class CPlayerCamera : MonoBehaviour {
 			new Vector3(0, 0, -distance)
 		);
 		cameraTransform.LookAt(center);
+	}
+
+	void camera_reset() {
+		distance = 3.0f;
+		angleY = 0.0f;
+		angleX = 0.0f;
+
+		centerOffset = new Vector3(0, 1, 0);
 	}
 }
