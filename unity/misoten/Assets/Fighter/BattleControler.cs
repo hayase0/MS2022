@@ -22,6 +22,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
     // UIManager
     UIController cs_uictrl;
     Timer cs_timer;
+    OddsGauge cs_oddsgauge;
 
     // ゲージ用
     [SerializeField] private Image[] Fighter1greenGauge;
@@ -51,6 +52,8 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
         cs_uictrl = uim.GetComponent<UIController>();
         GameObject uitimer = cs_uictrl.GetTimer();
         cs_timer = uitimer.transform.Find("Timer").gameObject.GetComponent<Timer>();
+
+        cs_oddsgauge = GameObject.Find("OddsGaugeManager(Clone)").GetComponent<OddsGauge>();
     }
 
     // Update is called once per frame
@@ -236,7 +239,10 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                     // タイマーリセット
                     cs_timer.ResetTime();
                     // UI非表示
-                    cs_uictrl.SetUIActive(true);                   
+                    cs_uictrl.SetUIActive(true);
+
+                    //ゲージの初期化用
+                    cs_oddsgauge.SetisInit(false);
                 }
                 break;
 
@@ -313,5 +319,13 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
 
             Fighter2greenGauge[i].fillAmount = valueTo;
         }
+    }
+
+    public int GetState() {
+        int a;
+
+        a = (int)state;
+
+        return a;
     }
 }
