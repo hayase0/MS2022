@@ -2,15 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class ChatSystem : MonoBehaviour {
     private int id = 0;
+
+    //チャット入力欄
     [SerializeField] InputField chatInputField;
+
+    //チャットノード
     [SerializeField] GameObject chatNodePrefab;
+
+    //チャットコンテンツ
     [SerializeField] GameObject content;
-    void Start() {
+
+    private void Start() {
     }
-    public void OnClickMineButton() {
+
+    void Update() {
+        //Enterキーを入力したら、InputFieldのアクティブを切り替える
+        if (Input.GetKey(KeyCode.T)) {
+            chatInputField.ActivateInputField();
+        }
+
+        if (Input.GetKey(KeyCode.Return)) {
+            chatInputField.DeactivateInputField();
+        }
+    }
+    public void InputText() {
         CreateChatNode(ChatRoll.MINE);
+        
     }
     public void OnClickOthersButton() {
         CreateChatNode(ChatRoll.OTHERS);
@@ -24,6 +44,7 @@ public class ChatSystem : MonoBehaviour {
         chatNode.GetComponent<ChatNode>().Init(data);
     }
 }
+
 public enum ChatRoll {
     MINE,
     OTHERS,
