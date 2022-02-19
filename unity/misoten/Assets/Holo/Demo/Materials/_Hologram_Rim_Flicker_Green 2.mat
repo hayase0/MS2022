@@ -7,15 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: aka_wa
-  m_Shader: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHABLEND_ON
+  m_Name: _Hologram_Rim_Flicker_Green 2
+  m_Shader: {fileID: 4800000, guid: 29fed12d8547e354e90be987488147c1, type: 3}
+  m_ShaderKeywords: SCANLINES _GLOW_ON _SCAN_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -40,16 +39,28 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Flicker:
+        m_Texture: {fileID: 2800000, guid: a0775ddee39477446bcbcedd7ca1bd22, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _FlickerTex:
         m_Texture: {fileID: 2800000, guid: a0775ddee39477446bcbcedd7ca1bd22, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 47b33282dca176b4491fc07cff3760f2, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise:
+        m_Texture: {fileID: 2800000, guid: f3b9e38a46068dc4489959ca98a277ce, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseControl:
+        m_Texture: {fileID: 2800000, guid: a0775ddee39477446bcbcedd7ca1bd22, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -60,45 +71,62 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
+    - _Scanline:
+        m_Texture: {fileID: 2800000, guid: 7b0819c792d27f7448ecc71e55fce6aa, type: 3}
+        m_Scale: {x: 0, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Scanline2:
+        m_Texture: {fileID: 2800000, guid: 09e20c67113e4264db88d74c4e770226, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ScanlinePattern:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Alpha: 1
+    - _Alpha: 0.619
     - _Brightness: 0.8
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DstBlend: 10
-    - _FlickerSpeed: 0.01
-    - _Fold: 1
-    - _GlitchIntensity: 0
+    - _DstBlend: 0
+    - _Flicker: 0
+    - _FlickerSpeed: 100
+    - _Fold: 63
+    - _Glitch: 1
+    - _GlitchIntensity: 10
     - _GlitchSpeed: 50
-    - _GlitchTime: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0.2
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _GlowSpeed: 10
     - _GlowTiling: 0.01
     - _Metallic: 0
-    - _Mode: 2
+    - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RimPower: 5
-    - _ScanSpeed: -0.13
-    - _ScanTiling: 60
+    - _RimFallness: 0.236
+    - _RimFalloff: 0.1
+    - _RimPower: 5.94
+    - _RimStrength: 2.5
+    - _ScanSpeed: -0.5
+    - _ScanTiling: 11.7
+    - _Scanline: 0
+    - _ScanlineSize: 1
+    - _ScanlineSpeed: 2
+    - _ScanlineSpeed2: 1
+    - _ScanlineTiling: 8
+    - _ScanlineTiling2: 0.05
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _UVSec: 0
-    - _WorldScale: 20
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Direction: {r: 0, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 1, g: 0, b: 0.034242153, a: 1}
-    - _RimColor: {r: 1, g: 0.48809582, b: 0, a: 1}
-    - _TintColor: {r: 1, g: 0.06901499, b: 0, a: 1}
+    - _MainColor: {r: 1, g: 0.00000007152558, b: 0, a: 1}
+    - _RimColor: {r: 1, g: 0.0072611067, b: 0, a: 1}
+    - _ScanlineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

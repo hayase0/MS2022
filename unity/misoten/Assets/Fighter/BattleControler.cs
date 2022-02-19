@@ -10,6 +10,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
     [SerializeField] int hp1, hp2;                     // ファイターのHP
     [SerializeField] int maxhp = 100;                  // ファイターの最大HP
     [SerializeField] int interval = 10;                // インターバル時間
+    [SerializeField] int spawntime = 15;               // ファイター生成時間
 
     GameObject fighter1, fighter2;                     // ファイターオブジェクト
     Animator animator1, animator2;                     // ファイターのアニメーター
@@ -18,6 +19,10 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
     float timer = 0;                                   // タイマー
     int ratio = 50;
 
+
+    ReadyController Readycontroller; 
+    RedWinController RedWincontroller; 
+    BlueWinController BlueWincontroller; 
 
     // UIManager
     UIController cs_uictrl;
@@ -36,6 +41,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
         INTERVAL,
         SPAWN,
         WAIT,
+        READY,
         FIGHT,
         END,
     }
@@ -54,6 +60,15 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
         cs_timer = uitimer.transform.Find("Timer").gameObject.GetComponent<Timer>();
 
         cs_oddsgauge = GameObject.Find("OddsGaugeManager(Clone)").GetComponent<OddsGauge>();
+
+        GameObject word = GameObject.Find("ready");
+        Readycontroller = word.GetComponent<ReadyController>();
+
+        word = GameObject.Find("redwin");
+        RedWincontroller = word.GetComponent<RedWinController>();
+
+        word = GameObject.Find("bluewin");
+        BlueWincontroller = word.GetComponent<BlueWinController>();
     }
 
     // Update is called once per frame
@@ -64,7 +79,7 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                 //timer += Time.deltaTime;
 
                 // interval経過後キャラ生成
-                if (cs_timer.GetTime() <= 10.0f) {
+                if (cs_timer.GetTime() <= spawntime) {
                     state = BATTLESTATE.SPAWN;
                     timer = 0;
                 }
@@ -90,14 +105,15 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
             case BATTLESTATE.WAIT:
 
                 // ファイトステートに移行
-                if (cs_timer.GetTime() <= 0.0f) {
-                    animator1.SetBool("Wait", false);
-                    animator2.SetBool("Wait", false);
-                    state = BATTLESTATE.FIGHT;
-
+                if (cs_timer.GetTime() <= 0.0f) {                   
+                    Readycontroller.StartExpansion();
+                    state = BATTLESTATE.READY;
                     // UI非表示
                     cs_uictrl.SetUIActive(false);
                 }
+                break;
+            // 文字表示-----------------------------------------------------------
+            case BATTLESTATE.READY:
                 break;
             // ファイター戦闘-----------------------------------------------------
             case BATTLESTATE.FIGHT:
@@ -138,13 +154,19 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
                     // ゲージ用
                     GaugeReducationFighter1(maxhp);
 
-                    hp1 = 0;
+                    if (hp1 != 0) {
+                        BlueWincontroller.StartExpansion();
+                        hp1 = 0;
+                    }
                 }
                 if (animator2.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Two Handed Sword Death") {
                     // ゲージ用
                     GaugeReducationFighter2(maxhp);
 
-                    hp2 = 0;
+                    if (hp2 != 0) {
+                        RedWincontroller.StartExpansion();
+                        hp2 = 0;
+                    }
                 }
 
                 // ダメージモーション再生
@@ -275,6 +297,12 @@ public class BattleControler : SingletonMonoBehaviour<BattleControler> {
             Destroy(fighter2);
             fighter2 = null;
         }
+    }
+
+    public void StartFight() {
+        animator1.SetBool("Wait", false);
+        animator2.SetBool("Wait", false);
+        state = BATTLESTATE.FIGHT;
     }
 
     // 勝敗を取得
