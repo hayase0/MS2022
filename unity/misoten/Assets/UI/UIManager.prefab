@@ -48,4 +48,5 @@ MonoBehaviour:
   prefabOddsGaugeManager: {fileID: 35850541047491919, guid: 0ac58ac79a58ea943ad3e715a67c1288, type: 3}
   prefabCursorManager: {fileID: 7472624116681447152, guid: 2ec968bbb1c558544be44bdf19c28c5b, type: 3}
   prefabDateTimeManager: {fileID: 7974655024482894410, guid: 2873cf58716a43f44af58b702709de9d, type: 3}
+  prefabMoneyManager: {fileID: 912068937017421621, guid: 4136699d66f9fc94eaa35656eb6fe9a2, type: 3}
   targetCamera: {fileID: 0}

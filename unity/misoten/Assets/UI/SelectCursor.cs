@@ -5,7 +5,7 @@ using UnityEngine;
 public class SelectCursor : MonoBehaviour
 {
     [SerializeField] private GameObject cursor; //ƒLƒƒƒ“ƒoƒX“à‚ÌSelectCursor‚ð“ü‚ê‚é
-    private bool SelectRed;                     //Red‚É“Š•[‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
+    [SerializeField] private bool SelectRed;                     //Red‚É“Š•[‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
     private float countDownTime;                //“Š•[ŽžŠÔŽæ“¾—p
 
     void Start()
@@ -39,6 +39,16 @@ public class SelectCursor : MonoBehaviour
             }
         }
 
+        if(cursor.transform.localPosition.x == -125.0f)
+        {
+            SelectRed = true;
+        }
 
     }
+
+
+    public bool GetSelectRed() {
+        return SelectRed;
+    }
+
 }

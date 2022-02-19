@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject prefabOddsGaugeManager;
     [SerializeField] private GameObject prefabCursorManager;
     [SerializeField] private GameObject prefabDateTimeManager;
+    [SerializeField] private GameObject prefabMoneyManager;
 
     // インスタンス
     private GameObject UITimer;
@@ -29,6 +30,7 @@ public class UIController : MonoBehaviour
         Instantiate(prefabOddsGaugeManager, Vector3.zero, Quaternion.identity);
         Instantiate(prefabCursorManager, Vector3.zero, Quaternion.identity);
         Instantiate(prefabDateTimeManager, Vector3.zero, Quaternion.identity);
+        Instantiate(prefabMoneyManager, Vector3.zero, Quaternion.identity);
 
         // キャンバスのタイマーと投票部分
         UITimer = CanvasOdds.transform.Find("BackGround01").gameObject;
