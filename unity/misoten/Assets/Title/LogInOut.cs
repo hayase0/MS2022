@@ -23,7 +23,7 @@ public class LogInOut : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
             title = 1;
 
@@ -31,7 +31,7 @@ public class LogInOut : MonoBehaviour
             logout.SetActive(false);
 
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
             title = 0;
             
@@ -43,7 +43,7 @@ public class LogInOut : MonoBehaviour
         {
             gameObject.SetActive(true);
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space)) 
             {
                 SceneManager.LoadScene("main");
             }
