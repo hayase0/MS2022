@@ -10,6 +10,9 @@ public class CGameManager : MonoBehaviour {
       UnityEngine.Application.Quit();
 #endif
     }
+    private void Start() {
+        Application.targetFrameRate = 60;
+    }
     void Update() {
         if (Input.GetKey(KeyCode.Escape)) Quit();
     }
